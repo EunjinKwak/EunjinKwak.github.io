@@ -1,0 +1,88 @@
+
+ #header {
+    height: 70px;
+ }
+ /* 테이블 */
+	 .wrap{
+	 	width: 70%; margin: 0 auto;
+	 }
+	 .tables {
+	 	border: 1px solid #ddd;
+	 }
+	 .tables th, .tables td {
+        border-collapse: collapse;
+		border: 1px solid #ddd; 
+	 }
+	 .tables th{
+		padding: 10px 10px;
+		width: 30%;
+		background-color: #0B2161;
+		color: white;
+		height: 20px;
+	}
+	.inline{
+		text-align: center;
+		font-size : 0.9rem;
+	}
+	.table td{
+		padding: 10px 20px;
+	}
+	.getline{
+		text-align : left;
+		font-size : 1rem;
+	}
+	 .proposal{
+		text-align: center;
+		padding: 10px 10px;
+		width: 20%;
+		background-color: #0B2161;
+		color: white; 
+		border: 1px solid #ddd;
+		font-size : 0.9rem;
+	}
+	/* 과목정보 제목 */
+	 .title{
+	 	width: 70%;
+		margin: 50px auto;
+		text-align : center;
+		font-size: 1.3rem;
+	 }
+	 /* 검색바 */
+	.choose {
+		margin: 0 auto;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.search {
+		border: black 1px solid;
+		width: 120px;
+		height: 20px;
+		font-size: 0.7rem;
+	}
+	.write{
+		width: 500px;
+		font-size : 0.9rem;
+		padding: 0 15px;
+	}
+	.writing{
+		padding: 20px;
+	}
+	/* 버튼들  */
+	.botton {
+		float: right;
+		border: 1px solid #0B2161;
+		margin: auto;
+		background-color: #0B2161;
+		width : 80px;
+		padding: 3px 7px;
+		color: white;
+	}
+	.botton input{
+		color: white;
+	}
+	.botton:hover {
+		background-color: #00B3DC;
+		border: 1px solid #00B3DC;
+		color: white;
+	}
+	

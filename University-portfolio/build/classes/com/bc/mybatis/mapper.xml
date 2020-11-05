@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BIT_UNV">
+	
+	<!-- 전체 과목 개수 조회 -->
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(*) FROM SUBJECT
+	</select>
+	
+	<!-- 전체 과목 조회  -->
+	<select id="list" resultType="com.bc.model.vo.RegistrationVO"
+			parameterType="Map">
+		SELECT * 
+		  FROM (SELECT ROWNUM R_NUM, S.SUBJECTNUM, S.SUBJECT, P.NAME, S.TIME, S.CLASSROOM, S.GRADE, S.PERSONNEL
+			  FROM SUBJECT S, PROFESSOR P
+			 WHERE S.F_NUM = P.F_NUM)
+	      WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 키워드로 과목 조회  -->
+	<select id="search" parameterType="com.bc.model.vo.SearchMap"
+			resultType="com.bc.model.vo.RegistrationVO">
+		SELECT * 
+		  FROM (SELECT ROWNUM R_NUM, S.SUBJECTNUM, S.SUBJECT, P.NAME, S.TIME, S.CLASSROOM, S.GRADE, S.PERSONNEL
+			  FROM SUBJECT S, PROFESSOR P, DEPARTMENT D
+			 WHERE S.F_NUM = P.F_NUM
+			   AND S.D_NUM = D.D_NUM
+	      	   
+			      <choose>
+			       		<when test="search == 0">AND
+			       			DEPARTMENT LIKE '%'||#{keyword}||'%' 
+			       		</when>
+			       		<when test="search == 1">AND
+			       			SUBJECT LIKE '%'||#{keyword}||'%' 
+			       		</when>
+			       		<when test="search == 2">AND
+			       			 NAME LIKE '%'||#{keyword}||'%' 
+			       		</when>
+			       		<when test="search == 3">
+			       			 ORDER BY R_NUM
+			       		</when>
+			       </choose>
+			 )
+	</select>
+	
+	<!-- 키워드로 과목조회 페이징  -->
+	<select id="searchlistall" parameterType="com.bc.model.vo.SearchListVO"
+			resultType="com.bc.model.vo.RegistrationVO">
+		SELECT * 
+		  FROM (SELECT ROWNUM R_NUM, S.SUBJECTNUM, S.SUBJECT, P.NAME, S.TIME, S.CLASSROOM, S.GRADE, S.PERSONNEL
+			  FROM SUBJECT S, PROFESSOR P, DEPARTMENT D
+			 WHERE S.F_NUM = P.F_NUM
+			   AND S.D_NUM = D.D_NUM
+	      	   
+			      <choose>
+			       		<when test="search == 0">AND
+			       			DEPARTMENT LIKE '%'||#{keyword}||'%' 
+			       		</when>
+			       		<when test="search == 1">AND
+			       			SUBJECT LIKE '%'||#{keyword}||'%' 
+			       		</when>
+			       		<when test="search == 2">AND
+			       			 NAME LIKE '%'||#{keyword}||'%' 
+			       		</when>
+			       		<when test="search == 3">
+			       			 ORDER BY R_NUM
+			       		</when>
+			       </choose>
+			 )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	<!-- 로그인 -->
+	<select id="login" resultType="com.bc.model.vo.StudentVO" parameterType="map">
+		SELECT *
+		  FROM STUDENT
+		 WHERE HAKBUN=#{hakbun} AND PASSWORD=#{password}
+	</select>
+	<!-- 패스워드로 아이디 중복확인 -->
+	<select id="pwdCheck" resultType="com.bc.model.vo.StudentVO" parameterType="String">
+		SELECT *
+		  FROM STUDENT
+		 WHERE HAKBUN=#{hakbun}
+	</select>
+	<!-- 회원가입 -->
+	<update id="sign" parameterType="com.bc.model.vo.StudentVO">
+		UPDATE STUDENT
+		SET NAME=#{name}, PASSWORD=#{password}, EMAIL=#{email}, PHONE=#{phone}, D_NUM=#{d_num}
+		WHERE HAKBUN =#{hakbun}
+	</update>
+	
+	<!-- 아이디 찾기 -->
+	<select id="idSearch" resultType="String" parameterType="String">
+		SELECT HAKBUN
+		FROM STUDENT
+		WHERE EMAIL=#{email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="pwdSearch" resultType="String" parameterType="map">
+		SELECT PASSWORD
+		FROM STUDENT
+		WHERE HAKBUN=#{hakbun} AND PHONE=#{phone}
+	</select>
+	
+	<!-- 시간표 보기 -->
+	<select id="schedule" resultType="com.bc.model.vo.RegistrationVO" parameterType="String">
+		SELECT * FROM CART
+		WHERE HAKBUN = #{hakbun}
+	</select>
+	
+	<!-- 학점 조회 -->
+	<select id="s_grade" resultType="int" parameterType="String">
+		 SELECT S_GRADE
+   		   FROM STUDENT
+   		  WHERE HAKBUN = #{hakbun}
+	</select>
+	
+	<!-- 수강가능 학점 카운트 다운 -->
+	<update id="s_grade_down" parameterType="Map">
+		UPDATE STUDENT
+   		   SET S_GRADE = S_GRADE - TO_NUMBER(#{grade})
+   		 WHERE HAKBUN = #{hakbun}
+	</update>
+	
+	<!-- 수강가능 학점 카운트 업 -->
+	<update id="s_grade_up" parameterType="Map">
+		UPDATE STUDENT
+   		   SET S_GRADE = S_GRADE + TO_NUMBER(#{grade})
+   		 WHERE HAKBUN = #{hakbun}
+	</update>
+	
+	<!-- 수강정원 카운트 다운 -->
+	<update id="personnel_down" parameterType="String">
+		UPDATE SUBJECT
+   		   SET PERSONNEL = PERSONNEL - 1
+  		 WHERE SUBJECTNUM = #{subjectnum}
+	</update>
+	
+	<!-- 수강정원 카운트 업 -->
+	<update id="personnel_up" parameterType="String">
+		UPDATE SUBJECT
+   		   SET PERSONNEL = PERSONNEL + 1
+  		 WHERE SUBJECTNUM = #{subjectnum}
+	</update>
+	
+		<!-- 전체 게시글 개수 조회 -->
+	<select id="totalCountNotice" resultType="int">
+		SELECT COUNT(*) FROM NOTICE
+	</select>
+	
+	<!-- 공지사항 조회수 1 증가 처리 -->
+	<update id="hitNotice" parameterType="String">
+		UPDATE NOTICE SET HIT = HIT + 1 WHERE N_IDX = #{n_idx}
+	</update>
+	
+	<!-- 페이지에 표시할 게시글  목록 조회 
+	parameterType="Map" : begin, end 값 전달 용도
+	key-value 형태의 Map 사용 바인드변수명이 key가 됨-->
+	<select id="listNotice" resultType="com.bc.model.vo.NoticeVO"
+		parameterType="Map">
+		SELECT *
+		  FROM (SELECT ROWNUM R_NUM, NTC.*
+		          FROM (SELECT *
+		                  FROM NOTICE
+		                 ORDER BY N_IDX DESC
+		               ) NTC
+		        )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 공지사항 게시글 상세보기 -->
+	<select id="viewNotice" resultType="com.bc.model.vo.NoticeVO" 
+		parameterType="String">
+		SELECT * FROM NOTICE WHERE N_IDX = #{n_idx}
+	</select>
+	
+	<!-- 공지사항 게시글 입력 -->
+	<insert id="insertNotice" parameterType="com.bc.model.vo.NoticeVO">
+		INSERT INTO NOTICE
+		       (N_IDX, NAME, TITLE, CONTENT, EMAIL,
+		       REGDATE, HIT, HAKBUN)
+		VALUES (#{n_idx}, #{name}, #{title}, #{content},
+		       #{email}, TO_CHAR(SYSDATE, 'RRRR-MM-DD HH24:MI:SS'), 0, #{hakbun})
+	</insert> 
+	
+	<!-- 공지사항 게시글 수정 -->
+	<update id="updateNotice" parameterType="com.bc.model.vo.NoticeVO">
+		UPDATE NOTICE
+		   SET TITLE= #{title}, 
+		       CONTENT = #{content}
+		WHERE N_IDX = #{n_idx}
+	</update>
+	
+	<!-- 공지사항 게시글 삭제 -->
+	<delete id="deleteNotice" parameterType="String">
+		DELETE FROM NOTICE WHERE N_IDX = #{n_idx}
+	</delete> 
+	
+	<!-- 검색한 공지사항 글 조회-->
+	<select id="searchNotice" resultType="com.bc.model.vo.NoticeVO" parameterType="Map">
+		SELECT * FROM NOTICE
+		<choose>
+			<when test="idx == 'title'">WHERE TITLE LIKE '%'||#{keyword}||'%' </when>
+			<when test="idx == 'content'">WHERE CONTENT LIKE '%'||#{keyword}||'%' </when>
+			<otherwise>WHERE 1 = 2 </otherwise>
+		</choose>
+		ORDER BY N_IDX DESC
+	</select>
+	
+	<!-- 전체 학생 목록 조회 -->
+	<select id="listStudent" resultType="com.bc.model.vo.StudentVO">
+		SELECT *
+		  FROM STUDENT
+	</select>
+	
+	<!-- 검색한 학생 정보 조회-->
+	<select id="searchManager" resultType="com.bc.model.vo.StudentVO" parameterType="Map">
+		SELECT * FROM STUDENT
+		<choose>
+			<when test="idx == 'hakbun'">WHERE HAKBUN LIKE '%'||#{keyword}||'%' </when>
+			<when test="idx == 'name'">WHERE NAME LIKE '%'||#{keyword}||'%' </when>
+			<when test="idx == 'email'">WHERE EMAIL LIKE '%'||#{keyword}||'%' </when>
+			<when test="idx == 'phone'">WHERE PHONE LIKE '%'||#{keyword}||'%' </when>
+			<when test="idx == 'd_num'">WHERE D_NUM LIKE '%'||#{keyword}||'%' </when>
+			<otherwise>WHERE 1 = 2 </otherwise>
+		</choose>
+		ORDER BY HAKBUN DESC
+	</select>
+		
+	<!-- 새로운 강의 추가 -->
+	<insert id="insertSubject" parameterType="com.bc.model.vo.SubjectVO">
+		INSERT INTO SUBJECT
+		       (SUBJECTNUM, SUBJECT, TIME, CLASSROOM, GRADE,
+       			D_NUM, F_NUM, PERSONNEL)
+		VALUES (#{subjectnum}, #{subject}, #{time}, #{classroom}, #{grade},
+		       #{d_num}, #{f_num}, #{personnel})
+	</insert> 
+	<!-- 관리자 수강신청 (해당과목 신청한 학생학번보기) -->
+	<select id="selHakbun" resultType="String"
+			parameterType="String">
+		SELECT HAKBUN
+		FROM CART
+		WHERE SUBJECTNUM = #{subjectnum}
+	</select>
+	
+	<!-- 관리자 수강신청 (신청 학생 정보보기)  -->
+	<select id="CHlist" resultType="com.bc.model.vo.StudentVO"
+			parameterType="String">
+		SELECT *
+		FROM STUDENT
+		WHERE HAKBUN = #{hakbun}
+	</select>
+	
+	<!-- =========================수강후기======================= -->
+
+	<!-- 전체 게시글 개수 조회 -->
+	<select id="CRtotalCount" resultType="int">
+		SELECT COUNT(*) FROM CR_BBS
+	</select>
+	
+	
+	<!-- 페이지에 표시할 게시글 조회 
+		parameterType="Map" : begin, end 값 전달 용도
+		key-value 형태의 Map 사용 바인드변수명이 key가 됨-->
+	<select id="CRlist" resultType="CR_BBSVO"
+			parameterType="Map">
+		SELECT *
+		  FROM (SELECT ROWNUM R_NUM, CR_BBS.*
+		          FROM (SELECT *
+		                  FROM CR_BBS
+		                 ORDER BY B_IDX DESC
+		               ) CR_BBS
+		        )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 게시글 하나 조회 -->
+	<select id="CRone" resultType="CR_BBSVO" parameterType="String">
+		SELECT B_IDX, SUBJECTNUM, TITLE, WRITER, WRITER_DATE,
+		       CONTENT,HIT,HAKBUN
+		FROM CR_BBS
+		WHERE B_IDX = #{b_idx}
+	</select>
+	
+	<!-- 게시글 입력 -->
+	<insert id="CRinsert" parameterType="CR_BBSVO">
+		INSERT INTO CR_BBS
+		       (B_IDX, SUBJECTNUM, TITLE, WRITER, WRITER_DATE,
+		       CONTENT, HIT,HAKBUN)
+		VALUES (CR_BBS_SEQ.NEXTVAL, #{subjectnum}, #{title}, #{writer}, SYSDATE,
+		       #{content}, 0, #{hakbun} )
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<update id="CRupdate" parameterType="CR_BBSVO">
+		UPDATE CR_BBS
+		   SET
+		    TITLE = #{title}, 
+		    WRITER = #{writer},
+			WRITER_DATE = SYSDATE,
+			CONTENT = #{content}
+		WHERE B_IDX = #{b_idx}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="CRdelete" parameterType="String">
+		DELETE FROM CR_BBS WHERE B_IDX = #{b_idx}
+	</delete>
+	
+	<!-- 조회수 1 증가 처리 -->
+	<update id="CRhit" parameterType="int">
+		UPDATE CR_BBS SET HIT = HIT + 1 WHERE B_IDX = #{b_idx}
+	</update>
+	
+	<!-- 카테고리별 게시글 검색 -->
+	
+	<select id="CRsearch" parameterType="map" 
+			resultType="com.bc.model.vo.CR_BBSVO">
+		SELECT *
+		  FROM CR_BBS
+		<choose>
+			<when test="idx == 0">
+				WHERE TITLE LIKE  '%'||#{keyword}||'%'
+			</when>
+			<when test="idx == 1">
+				WHERE WRITER LIKE '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				WHERE 1 = 2
+			</otherwise>
+		</choose>
+		ORDER BY B_IDX
+	</select>
+	
+	<!-- 수강후기 댓글 조회 -->
+	<select id="CRCommList" parameterType="String"
+			resultType="com.bc.model.vo.CommVO">
+		SELECT *
+		FROM COMMENTS
+		WHERE B_IDX = #{b_idx}
+		ORDER BY C_IDX DESC
+	</select>
+	
+	<!-- 수강후기 댓글입력 -->
+	<insert id="CRc_insert" parameterType="com.bc.model.vo.CommVO">
+		INSERT INTO COMMENTS
+		       (C_IDX, CONTENT, WRITER, WRITER_DATE,
+		       B_IDX,HAKBUN)
+		VALUES (COMMENTS_SEQ.NEXTVAL, #{content}, #{writer}, SYSDATE, #{b_idx}, #{hakbun})
+	</insert>
+	<!-- 댓글 삭제 -->
+	<delete id="CRc_delete" parameterType="String">
+		DELETE FROM COMMENTS WHERE C_IDX = #{c_idx}
+	</delete>
+	
+	
+	<select id="CRd_sel" parameterType="String" resultType="String">
+		SELECT D_NUM FROM STUDENT
+		  WHERE HAKBUN =  #{hakbun}
+	</select>
+	
+	<select id="CRsub_sel" parameterType="map" resultType="com.bc.model.vo.SelectVO">
+		SELECT D_NUM,SUBJECT,SUBJECTNUM FROM SUBJECT
+		  WHERE D_NUM = #{d_num}
+	</select>
+	
+	
+	
+	
+	<!-- =========================과목정보======================= -->
+	
+	<!-- 전체 게시글 개수 조회 -->
+	<select id="CRs_totalCount" resultType="int">
+		SELECT COUNT(*) FROM SUBJECT
+	</select>
+	
+	<!-- 과목정보 리스트 -->
+	 
+	<select id="CRs_list" resultType="SubjectVO"
+			parameterType="Map">
+			SELECT *
+		  FROM ( SELECT *
+			FROM (SELECT ROWNUM R_NUM, SUBJECT.*
+		          FROM (SELECT S.SUBJECTNUM, S.SUBJECT, P.NAME, S.TIME, S.CLASSROOM ,S.D_NUM, S.F_NUM
+						 FROM PROFESSOR P, SUBJECT S
+              WHERE P.F_NUM = S.F_NUM) SUBJECT
+              )
+              )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end}
+     
+ 
+
+	</select>
+
+	<!-- 게시글 하나 조회 -->
+	<select id="CRs_one" resultType="SubjectVO" parameterType="String">
+		SELECT S.subjectnum, S.SUBJECT, P.NAME
+		 FROM  PROFESSOR P, SUBJECT S
+     	WHERE P.F_NUM = S.F_NUM
+     	    AND S.SUBJECTNUM = #{subjectnum}
+	</select>
+	
+		<!-- 카테고리별 게시글 검색 -->
+	
+	<select id="CRs_search" parameterType="map" 
+			resultType="SubjectVO">
+		 SELECT *
+			FROM (SELECT ROWNUM R_NUM, SUBJECT.*
+		          FROM (SELECT S.SUBJECTNUM, S.SUBJECT, P.NAME, S.TIME, S.CLASSROOM ,S.D_NUM, S.F_NUM
+						 FROM PROFESSOR P, SUBJECT S
+              WHERE P.F_NUM = S.F_NUM
+		<choose>
+			<when test="idx == 0">
+				AND S.SUBJECT LIKE  '%'||#{keyword}||'%' ) SUBJECT
+		        )
+			</when>
+			<when test="idx == 1">
+				AND P.NAME LIKE '%'||#{keyword}||'%' ) SUBJECT
+		        )
+			</when>
+			<otherwise>
+				WHERE 1 = 2
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- =====================수강신청 담기==================== -->
+	
+	<!-- 수강 신청 -->
+	<insert id="cart_insert" parameterType="com.bc.model.vo.CartVO">
+		INSERT INTO CART
+	      			(HAKBUN, SUBJECTNUM, SUBJECT, NAME, TIME, CLASSROOM, GRADE)
+		VALUES (#{hakbun}, #{subjectnum}, #{subject}, #{name}, #{time}, #{classroom}, #{grade})
+	</insert> 
+	
+	<!-- 수강 신청 장바구니에 보여주기 -->
+	<select id="cart_sel" resultType="com.bc.model.vo.CartVO"
+			parameterType="String">
+		SELECT SUBJECTNUM, SUBJECT, NAME, TIME, CLASSROOM, GRADE 
+		  FROM CART
+		 WHERE HAKBUN = #{hakbun}
+	</select>
+	
+	<!-- 수강 삭제 -->
+	<delete id="cart_del" parameterType="com.bc.model.vo.CartVO">
+		DELETE FROM CART WHERE SUBJECTNUM = #{subjectnum} 
+	</delete>
+</mapper>
+
