@@ -1,0 +1,295 @@
+/* sideBar */
+.sideBar {
+    position: absolute;
+    padding: 4%;
+}
+.NavUL .NavLI a{
+    list-style: none;
+    line-height: 80px;
+    position: relative;
+    z-index: 10;
+    font-size: 30px;
+    font-weight: 700;
+    margin-left: 80px;
+    color: #333;
+}
+.NavUL .NavLI.active a{
+    color: #FAAC58;
+}
+.NavUL .NavLI a:hover{
+    list-style: none;
+    line-height: 80px;
+    position: relative;
+    z-index: 10;
+    font-size: 30px;
+    font-weight: 700;
+    margin-left: 80px;
+    color:#FAAC58;
+}
+.Nav {
+    overflow: hidden;
+}
+
+.photo2 img {
+    position: fixed;
+    height: 100%;
+    left: 193px;
+    top: 0;
+    position: fixed;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+/* contact CSS */
+.contact {
+    list-style: none;
+    margin-left: 160px;
+    position: relative;
+    margin-top: 320px;
+}
+.contact ul {
+    margin-bottom: 20px;
+}
+.contactT {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 30px;
+}
+.contactS {
+    color: white;
+}
+
+.main {
+    margin-left: 33%;
+}
+
+/* section0 */
+#section0{position: relative;}
+.mainRolling{ width:100%; height:100%; overflow:hidden; text-align:500px; display:block; position:relative; margin-left: 123px;}
+.mainRolling .swiper-container { width: 55%; height: 100%; }
+.mainRolling .swiper-slide {width:90%; height: 100%; overflow:hidden; box-sizing: border-box}
+.mainRolling .swiper-slide:nth-child(1){background: url(../img/main5.jpg) /* background: blanchedalmond */ no-repeat top 0px center; background-size: cover;}
+.mainRolling .swiper-slide:nth-child(2){background: url(../img/main8.jpg) /* background: #ddd */ no-repeat top 0px center; background-size: cover;}
+.mainRolling .swiper-pagination_main { width: 200px; position:absolute; bottom:10%; left:50%; transform:translateX(-50%);  display:block; z-index:50}
+.mainRolling .swiper-pagination_main .swiper-pagination-bullet { border-radius:0; width:8px; height:8px; margin-right:20px; background-color: white; opacity:1; border-radius: 8px; }
+.mainRolling .swiper-pagination-bullet-active {width:70px !important; height:8px; background-color: black !important;}
+.mainRolling .swiperText{position: absolute; width: 40%; z-index: 20; left: 20%; top: -50%; text-align: left; transition: all /* .5s */; }
+.mainRolling .swiper-slide.animate .swiperText{top: 30%; }
+.swiperText dt{margin-bottom: 30px;}
+.swiperText * {color: #ddd;}
+.sec * {color: #FAAC58;}
+.swiperText .tit{font-size: 3rem; font-weight: 600; margin-bottom: 30px; line-height: 4rem;}
+.swiperText .txt{font-size: 1.5rem; font-weight: 400;}
+
+
+/* section1 */
+#section1 {
+    overflow: hidden;
+    width: 100%;
+    padding: 100px 200px 0 500px;
+    box-sizing: border-box;
+    position: relative;
+    }
+    #section1 .aboutMe {
+    height: 100%;
+    float: left;
+    width: 40%;
+    margin-right: 80px;
+    }
+    #section1 .name {
+        font-size: 33px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-bottom: 30px;
+    }
+    #section1 .intro {
+        line-height: 25px;
+        font-size: 19px;
+    }
+    #section1 .intro span {
+        font-size: 22px;
+    font-weight: 500;
+    }
+    #section1 .greeting {
+        margin-top: 50px;
+        line-height: 30px;
+    }
+    #section1 .greeting span {
+        font-weight: 500;
+    }
+    #section1 .aboutMeInfo {
+    width: calc(50%);
+    float: left;
+    overflow: hidden;
+    }
+    .aboutMeInfo p {
+    line-height: 25px;
+    font-size: 13px;
+    font-weight: 400;
+    }
+    .aboutMeInfo b {
+    line-height: 35px;
+    font-size: 13px;
+    font-weight: 400;
+    }
+    .projectInfo p {
+    line-height: 50px;
+    font-weight: 500;
+    font-size: 16px;
+    }
+    .projectInfo dd {
+    line-height: 25px;
+    font-size: 14px;
+    }
+    .projectInfo1 p {
+    line-height: 50px;
+    font-weight: 500;
+    font-size: 16px;
+    }
+    .projectInfo1 dd {
+    line-height: 25px;
+    font-size: 14px;
+    }
+    .progress-bar1 {
+        width: 300px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #ddd;
+        display: inline-block;
+        /* margin-bottom: 2rem; */
+    }
+    .progress-value1 {
+        width: 70%;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #FAAC58;
+        display: inline-block;
+    }
+    .progress-bar2 {
+        width: 300px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #ddd;
+        display: inline-block;
+        /* margin-bottom: 2rem; */
+    }
+    .progress-value2 {
+        width: 65%;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #FAAC58;
+        display: inline-block;
+    }
+    .progress-bar3 {
+        width: 300px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #ddd;
+        display: inline-block;
+        /* margin-bottom: 2rem; */
+    }
+    .progress-value3 {
+        width: 80%;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #FAAC58;
+        display: inline-block;
+    }
+    .progress-bar4 {
+        width: 300px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #ddd;
+        display: inline-block;
+        /* margin-bottom: 2rem; */
+    }
+    .progress-value4 {
+        width: 75%;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #FAAC58;
+        display: inline-block;
+    }
+    .progress-bar5 {
+        width: 300px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #ddd;
+        display: inline-block;
+        /* margin-bottom: 2rem; */
+    }
+    .progress-value5 {
+        width: 60%;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #FAAC58;
+        display: inline-block;
+    }
+    .iltxt {
+        margin-bottom: 10px;
+        font-weight: 500;
+        font-size: 17px;
+    }
+    .ultit {
+        /* line-height: 20px; */
+        margin-bottom: 25px;
+        font-size: 15px;
+        /* margin-left: 10px; */
+    }
+    .ultit li {
+        line-height: 20px;
+        font-size: 15px;
+    }
+
+    /* section2 */
+
+#section2 {
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+#section2 .projectInfo {
+width: calc(50% - 25px);
+float: left;
+overflow: hidden;
+margin-top: 30px;
+margin-right: 50px;
+}
+#section2 .projectInfo1 {
+width: calc(50% - 25px);
+float: left;
+overflow: hidden;
+margin-top: 30px;
+}
+#section2 .name {
+font-size: 35px;
+font-weight: 400;
+line-height: 30px;
+margin-bottom: 50px;
+}
+#section2 .intro {
+    margin-top: 50px;
+    line-height: 25px;
+    font-size: 20px;
+}
+#section2 .greeting {
+    margin-top: 35px;
+    line-height: 25px;
+    font-size: 14px;
+    width: 70%;
+}
+.mainRolling1{ width:100%; height:100%; overflow:hidden; text-align:500px; display:block; position:relative; margin-left: 123px;}
+.mainRolling1 .swiper-container { width: 60%; height: 100%; }
+.mainRolling1 .swiper-slide {width:100%; height: 100%; overflow:hidden; box-sizing: border-box;}
+.mainRolling1 .swiper-slide:nth-child(1){/* width: 90%; */ background-color: white no-repeat top 0px center; background-size: cover; padding: 100px 10px 0px 70px;}
+.mainRolling1 .swiper-slide:nth-child(2){/* width: 90%; */ background-color: white no-repeat top 0px center; background-size: cover; padding: 100px 10px 0px 70px;}
+.mainRolling1 .swiper-slide .swiper-slide-active animate {width: 90%;}
+
+.mainRolling1 .swiper-pagination_main { width: 200px; position:absolute; bottom:10%; left:50%; transform:translateX(-50%);  display:block; z-index:50}
+.mainRolling1 .swiper-pagination_main .swiper-pagination-bullet { border-radius:0; width:8px; height:8px; margin-right:20px; background-color: #ddd; opacity:1; border-radius: 8px; }
+.mainRolling1 .swiper-pagination-bullet-active {width:70px !important; height:8px; background-color: black !important;}
+.swiperText1 a {width: 100px; height: 30px; color: #333; border: 1px solid #333; font-weight: 400; border-radius: 30px; text-align: center; line-height: 30px; float: right;}
+.swiperText1 a:hover{color:#FF8400; border: 1px solid #FF8400;}
+.swiperText1 * {color: #333;}
