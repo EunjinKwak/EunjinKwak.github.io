@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RoadmapMapper">
+
+	<!-- 1013추가 (박실) -->
+	<insert id="insertProject" parameterType="com.spring.withwork.vo.ProjectVO">
+		<selectKey keyProperty="p_num" order="BEFORE" resultType="int">
+			select project_seq.nextval from dual
+		</selectKey>
+		insert into project(p_num, c_num, name, m_num, startdate, enddate, regdate, status, subject, content)
+			values(#{p_num}, #{c_num}, #{name}, #{m_num} 
+        	, #{startDate}, #{endDate}, sysdate, #{status}, #{subject}, #{content} )
+	</insert>
+	
+	<!-- 1013수정 (박실) -->
+	<select id="prjList" resultType="com.spring.withwork.vo.ProjectVO" parameterType="string">	
+		select p.p_num, p.name, p.status, p.subject, p.startdate, p.enddate, p.content, g.g_name, p.m_num
+		from project p, guest g, member m
+		where p.m_num = m.m_num and m.g_num = g.g_num and p.c_num = #{c_num}
+	</select>
+	
+	<!-- 1013수정 (박실) -->
+	<select id="searchProject" parameterType="com.spring.withwork.vo.SearchProject"
+								resultType="com.spring.withwork.vo.ProjectVO">
+		select p.p_num, p.name, p.status, p.subject, p.startdate, p.enddate, p.content, g.g_name, p.m_num
+		from project p, guest g, member m
+		where p.m_num = m.m_num and m.g_num = g.g_num and p.c_num = #{c_num}
+		
+		<choose>
+			<when test='type.equals("P")'>
+				and (p.name like '%' || #{keyword} || '%')	
+			</when>
+			<when test='type.equals("M")'>
+				and (g.g_name like '%' || #{keyword} || '%')		
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 1013수정 (박실) -->
+	<select id="getPrj" resultType="com.spring.withwork.vo.ProjectVO" parameterType="string">
+		select p.p_num, p.name, p.status, p.subject, p.startdate, p.enddate, p.content, g.g_name, p.m_num, r.role, d.depart
+		from project p, guest g, member m, roles r, department d
+		where p.m_num = m.m_num and m.g_num = g.g_num and m.r_num = r.r_num and m.d_num = d.d_num
+            and p_num = #{p_num}
+	</select>
+
+	<!-- 1013수정 (박실) -->	 
+	 <select id="managerList" resultType="com.spring.withwork.vo.ProjectVO" parameterType="int">
+		select g.g_name, m.m_num, r.role, d.depart 
+		from guest g, member m, roles r, department d
+		where g.g_num = m.g_num and r.r_num = m.r_num and d.d_num = m.d_num 
+            and authority = '관리자' and m.c_num = #{c_num}
+	</select>
+	
+	<update id="updateProject" parameterType="com.spring.withwork.vo.ProjectVO">
+		update project set 
+		name = #{name},
+		m_num = #{m_num},
+		startdate = #{startDate},
+		enddate = #{endDate},
+		status = #{status},
+		subject = #{subject},
+		content = #{content}
+		where p_num = #{p_num}
+	</update>
+	
+	<!-- 1013추가 (박실) -->
+	<insert id="insertJoiner" parameterType="com.spring.withwork.vo.ProjectVO">
+		insert into projectjoiner(j_num, m_num, p_num)
+		values(projectjoiner_seq.nextval, #{m_num}, #{p_num})
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

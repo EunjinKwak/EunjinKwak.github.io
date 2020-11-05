@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberDAO">
+	<!-- 전체보기 -->
+	<select id="getAllMember" parameterType="member"
+		resultType="member">
+		SELECT G.G_NAME, G.EMAIL, D.D_NUM, D.DEPART, M.M_NUM, M.AUTHORITY, R.R_NUM, R.ROLE
+		FROM GUEST G, DEPARTMENT D, MEMBER M, ROLES R
+		WHERE M.G_NUM = G.G_NUM
+		AND M.D_NUM = D.D_NUM
+        AND M.R_NUM = R.R_NUM
+        AND M.C_NUM = #{c_num}
+	</select>
+	
+	<!-- 1명 정보 전체보기 -->
+	<select id="getOneMember" parameterType="member"
+		resultType="member">
+		SELECT G.G_NAME, G.EMAIL, D.D_NUM, D.DEPART, M.M_NUM, M.AUTHORITY, R.R_NUM, R.ROLE
+		FROM GUEST G, DEPARTMENT D, MEMBER M, ROLES R
+		WHERE M.G_NUM = G.G_NUM
+		AND M.D_NUM = D.D_NUM
+        AND M.R_NUM = R.R_NUM
+        AND M.M_NUM = #{m_num}
+	</select>
+	
+	<!-- 수정, 삭제 멤버보기 -->
+	<select id="getMember" parameterType="member"
+		resultType="member">
+		SELECT G.G_NAME, G.EMAIL, D.D_NUM, D.DEPART, M.M_NUM, M.AUTHORITY, R.R_NUM, R.ROLE
+		FROM GUEST G, DEPARTMENT D, COMPANY C, MEMBER M, ROLES R
+		WHERE M.G_NUM = G.G_NUM
+		AND M.D_NUM = D.D_NUM
+        AND M.C_NUM = C.C_NUM
+        AND M.R_NUM = R.R_NUM
+        AND C.C_NUM = #{c_num}
+	</select>
+	
+	<!-- 부서 불러오기 -->
+	<select id="getDepart" parameterType="member"
+		resultType="member">
+        SELECT D.DEPART, D.D_NUM 
+        FROM COMPANY C, DEPARTMENT D
+        WHERE C.C_NUM = D.C_NUM
+        AND C.C_NUM = #{c_num}
+	</select>
+	
+	<!-- 부서 불러오기 -->
+	<select id="getRoles" parameterType="member"
+		resultType="member">
+        SELECT R.ROLE, R_NUM 
+        FROM ROLES R, COMPANY C
+        WHERE R.C_NUM = C.C_NUM
+        AND C.C_NUM = #{c_num}
+	</select>
+	
+	<!-- 전체보기 -> 검색 -->
+	<select id="searchAllMember" parameterType="member"
+		resultType="member">
+		SELECT G.G_NAME, G.EMAIL, D.D_NUM, D.DEPART, M.M_NUM, M.AUTHORITY, R.R_NUM, R.ROLE
+		  FROM GUEST G, DEPARTMENT D, MEMBER M, ROLES R, COMPANY C
+		 WHERE G.G_NUM = M.G_NUM
+		   AND M.D_NUM = D.D_NUM
+           AND M.R_NUM = R.R_NUM
+           AND M.C_NUM = C.C_NUM
+           AND C.C_NUM = #{c_num}
+		   AND (G_NAME LIKE '%'||#{g_name}||'%'
+		    OR EMAIL LIKE '%'||#{email}||'%')
+	</select>
+	
+	<!-- 멤버추가 -> 검색 -->
+	<select id="searchAddMember" parameterType="member"
+		resultType="member">
+		SELECT G_NUM, G_NAME, EMAIL
+		  FROM GUEST 
+		 WHERE G_NAME LIKE '%'||#{g_name}||'%'
+		    OR EMAIL LIKE '%'||#{email}||'%'
+	</select>
+	
+	<!-- 멤버추가 -> 전체검색 -->
+	<select id="selectMember" parameterType="member"
+		resultType="member">
+		SELECT G.G_NUM
+  		  FROM GUEST G, MEMBER M, COMPANY C
+ 		 WHERE G.G_NUM = M.G_NUM 
+ 		   AND M.C_NUM = C.C_NUM
+ 		   AND C.C_NUM = #{c_num}
+	</select>
+	
+	<!-- 멤버수정 -> 검색 -->
+	<select id="searchUpMember" parameterType="member"
+		resultType="member">
+		SELECT G.G_NAME, G.EMAIL, D.D_NUM, D.DEPART, M.M_NUM, M.AUTHORITY, R.R_NUM, R.ROLE
+		  FROM GUEST G, DEPARTMENT D, COMPANY C, MEMBER M, ROLES R
+		 WHERE M.G_NUM = G.G_NUM
+		   AND M.D_NUM = D.D_NUM
+		   AND M.R_NUM = R.R_NUM
+           AND M.C_NUM = C.C_NUM
+		   AND M.C_NUM = #{c_num}
+		   AND (G_NAME LIKE '%'||#{g_name}||'%'
+		    OR EMAIL LIKE '%'||#{email}||'%')
+	</select>
+	
+	<!-- 멤버삭제 -> 검색 -->
+	<select id="searchDelMember" parameterType="member"
+		resultType="member">
+		SELECT G.G_NAME, G.EMAIL, D.D_NUM, D.DEPART, M.M_NUM, M.AUTHORITY, R.R_NUM, R.ROLE
+		  FROM GUEST G, DEPARTMENT D, COMPANY C, MEMBER M, ROLES R
+		 WHERE M.G_NUM = G.G_NUM
+		   AND M.D_NUM = D.D_NUM
+		   AND M.R_NUM = R.R_NUM
+           AND M.C_NUM = C.C_NUM
+		   AND M.C_NUM = #{c_num}
+		   AND (G_NAME LIKE '%'||#{g_name}||'%'
+		    OR EMAIL LIKE '%'||#{email}||'%')
+	</select>
+	
+	<!-- 멤버 초대 -->
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO MEMBER (M_NUM, C_NUM, D_NUM, G_NUM, AUTHORITY, R_NUM)
+		VALUES (MEMBER_SEQ.NEXTVAL, #{c_num}, (SELECT D_NUM FROM DEPARTMENT WHERE DEPART = #{depart} AND C_NUM = #{c_num}), #{g_num}, #{authority},
+				(SELECT R_NUM FROM ROLES WHERE ROLE = #{role} AND C_NUM = #{c_num}))
+	</insert>
+	
+	<!-- 멤버 수정 -->
+	<update id="updateMember" parameterType="member" >
+		UPDATE MEMBER SET D_NUM = (SELECT D_NUM FROM COMPANY C, DEPARTMENT D WHERE C.C_NUM = D.C_NUM AND C.C_NUM = #{c_num} AND DEPART = #{depart}), AUTHORITY = #{authority},
+					 	  R_NUM = (SELECT R_NUM FROM COMPANY C, ROLES R WHERE C.C_NUM = R.C_NUM AND C.C_NUM = #{c_num} AND ROLE = #{role})
+		 WHERE M_NUM = #{m_num}
+		 
+	</update>
+	
+	<!-- 멤버 삭제 -->
+	<delete id="deleteMember" parameterType="member">
+		DELETE FROM MEMBER WHERE M_NUM = #{m_num}
+	</delete>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

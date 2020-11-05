@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TodoDao">
+	<select id="getGuestCompany" parameterType="guest" resultType="guest">
+        SELECT G.*, M.M_NUM, C.C_NUM, D.D_NUM, C.NAME C_NAME, D.DEPART, R.ROLE, M.AUTHORITY    
+		FROM GUEST G, MEMBER M, ROLES R, COMPANY C, DEPARTMENT D   
+		WHERE G.G_NUM = M.G_NUM AND M.R_NUM = R.R_NUM AND M.C_NUM = C.C_NUM AND M.D_NUM = D.D_NUM AND G.G_NUM = #{g_num} AND C.C_NUM = #{c_num}
+	</select>
+	<insert id="insertTodo" parameterType="todo">
+		INSERT INTO TODO VALUES 
+		(TODOSEQ.NEXTVAL, #{p_num, jdbcType=VARCHAR}, #{d_num}, #{title}, #{text}, #{orderdate}, #{enddate}, #{order_m}, #{worker_m}, #{progress}, EDITSEQ.NEXTVAL, SYSDATE)
+	</insert>	
+	<insert id="insertConfirm" parameterType="todo">
+		INSERT INTO VERIFICATION (V_NUM, T_NUM, STATE) VALUES 
+		(VERIFICATION_SEQ.NEXTVAL, #{t_num}, '대기')
+	</insert>	
+	<select id="getAllTodo" parameterType="todo" resultType="todo">
+		SELECT * FROM TODO_GUEST_INFO WHERE WORKER_M = #{worker_m}
+	</select>
+	<select id="getTodoDetail" resultType="todo">
+		SELECT * FROM TODO_GUEST_INFO
+	</select>
+	<select id="getAllDepart" parameterType="depart" resultType="depart">
+		SELECT M.M_NUM, D.D_NUM, G.G_NAME, R.ROLE, D.DEPART 
+		FROM GUEST G, MEMBER M, ROLES R, COMPANY C, DEPARTMENT D 
+		WHERE G.G_NUM = M.G_NUM AND M.C_NUM = C.C_NUM AND M.R_NUM = R.R_NUM AND M.D_NUM = D.D_NUM AND M.D_NUM = #{d_num} 
+	</select>
+	<update id="updateTodo" parameterType="todo">
+		UPDATE TODO SET
+		TITLE = #{title},
+		TEXT = #{text},
+		ORDERDATE = #{orderdate},
+		ENDDATE = #{enddate},
+		WORKER_M = #{worker_m},
+		P_NUM = #{p_num},
+		PROGRESS = #{progress},
+		FINALDATE = SYSDATE
+		WHERE T_NUM = #{t_num}
+	</update>
+	<update id="dragTodoUpdate" parameterType="todo">
+		UPDATE TODO SET
+		WORKER_M = #{worker_m},
+		EDIT_NUM = EDITSEQ.NEXTVAL
+		WHERE T_NUM = #{t_num}
+	</update>
+	<update id="finalDateUpdate" parameterType="todo">
+		UPDATE TODO SET
+			TITLE = #{title},
+			TEXT = #{text},
+			ORDERDATE = #{orderdate},
+			ENDDATE = #{enddate},
+			WORKER_M = #{worker_m},
+			P_NUM = #{p_num},
+			PROGRESS = #{progress},
+			FINALDATE = SYSDATE
+		WHERE T_NUM = #{t_num}
+	</update>
+	<select id="getAllProject" parameterType="int" resultType="project">
+		SELECT M.M_NUM, P.P_NUM, P.NAME P_NAME, D.DEPART
+		FROM MEMBER M, DEPARTMENT D, PROJECT P, PROJECTJOINER J
+		WHERE M.D_NUM = D.D_NUM AND M.M_NUM = J.M_NUM AND P.P_NUM = J.P_NUM AND M.M_NUM = #{m_num}
+	</select>
+	<select id="getProjectIn" parameterType="int" resultType="project">
+		SELECT M.M_NUM, P.P_NUM, P.NAME P_NAME, D.DEPART, P.STATUS
+		FROM MEMBER M, DEPARTMENT D, PROJECT P, PROJECTJOINER J
+		WHERE M.D_NUM = D.D_NUM AND M.M_NUM = J.M_NUM AND P.P_NUM = J.P_NUM AND M.M_NUM = #{m_num} AND STATUS != '완료'
+	</select>
+	<select id="getOneProject" parameterType="int" resultType="project">
+		SELECT P_NUM, C_NUM, M_NUM, NAME P_NAME, STARTDATE, ENDDATE, REGDATE, STATUS, SUBJECT, CONTENT FROM PROJECT WHERE P_NUM = #{p_num}
+	</select>
+	<select id="getProjectJoiner" parameterType="int" resultType="guest">
+		SELECT M.M_NUM, G.G_NAME, D.DEPART, R.ROLE, P.P_NUM, P.NAME P_NAME 
+		FROM GUEST G, MEMBER M, ROLES R, DEPARTMENT D, PROJECT P, PROJECTJOINER J
+		WHERE G.G_NUM = M.G_NUM AND M.M_NUM = J.M_NUM AND M.R_NUM = R.R_NUM AND D.D_NUM = M.D_NUM AND P.P_NUM = J.P_NUM AND P.P_NUM = #{p_num}
+	</select>
+	<select id="getProjectTodo" parameterType="todo" resultType="todo">
+		SELECT * FROM TODO_GUEST_INFO WHERE WORKER_M = #{worker_m} AND P_NUM = #{p_num}
+	</select>
+	<select id="getProjectNotJoiner" parameterType="guest" resultType="guest">
+		SELECT G.G_NAME, M.M_NUM, D.DEPART, R.ROLE 
+		FROM GUEST G, MEMBER M, DEPARTMENT D, ROLES R 
+		WHERE G.G_NUM = M.G_NUM 
+		AND M.D_NUM = D.D_NUM 
+		AND M.R_NUM = R.R_NUM 
+		AND M.C_NUM = #{c_num} 
+		AND M.M_NUM NOT IN ( SELECT M.M_NUM FROM GUEST G, MEMBER M, PROJECTJOINER PJ WHERE G.G_NUM = M.G_NUM AND M.M_NUM = PJ.M_NUM AND PJ.P_NUM = #{p_num})
+	</select>
+	<insert id="inviteProject" parameterType="guest">
+		INSERT INTO PROJECTJOINER VALUES (PROJECTJOINER_SEQ.NEXTVAL, #{m_num}, #{p_num})
+	</insert>	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

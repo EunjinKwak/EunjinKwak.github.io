@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ConfirmDao"> 
+
+<!-- 완료가 아닐 때 -->
+<update id="updateConfirm" parameterType="confirm" >
+	UPDATE VERIFICATION
+	SET 
+		FEEDBACK = #{feedback},
+		STATE = #{state}
+	WHERE T_NUM = #{t_num} 
+</update>
+
+<!-- 완료일때 -->
+<update id="updateAll" parameterType="confirm" >
+	UPDATE VERIFICATION
+	SET 
+		CONFIRMDATE = SYSDATE,
+		FEEDBACK = #{feedback},
+		STATE = #{state}
+	WHERE T_NUM = #{t_num} 
+</update>
+
+<!-- 완료일때 -->
+<update id="finishTodo" parameterType="confirm" >
+       UPDATE TODO
+       SET 
+		PROGRESS = '종료'
+       WHERE T_NUM = #{t_num}
+</update>
+
+<!-- 게시물 목록 데이터 불러오기 -->
+<select id="getAllConfirm" parameterType="confirm" resultType="confirm">
+	SELECT
+		T.T_NUM,
+		TO_CHAR(T.ORDERDATE,'YYYY-MM-DD') ORDERDATE,
+		TO_CHAR(T.ENDDATE,'YYYY-MM-DD')ENDDATE,
+		TO_CHAR(V.CONFIRMDATE,'YYYY-MM-DD') CONFIRMDATE,
+		T.TITLE, 
+		T.WORKER_M, 
+		T.ORDER_M, 
+		V.STATE, 
+		V.V_NUM
+	FROM TODO T, VERIFICATION V
+		WHERE T.T_NUM = V.T_NUM
+	AND 
+		T.WORKER_M = #{worker_m} 
+		
+</select>
+
+<!-- <select id="listPage_TEMP" resultType="confirm" parameterType="com.spring.withwork.vo.Criteria">
+SELECT T_NUM,M_NUM,P_NUM,D_NUM,
+TITLE,TEXT,TO_CHAR(T.ORDERDATE,'YYYY-MM-DD') ORDERDATE,TO_CHAR(T.ENDDATE,'YYYY-MM-DD') ENDDATE,
+ORDER_M,WORKER_M,PROGRESS FROM (SELECT T_NUM,M_NUM,P_NUM,D_NUM,TITLE,TEXT,TO_CHAR(T.ORDERDATE,'YYYY-MM-DD') ORDERDATE,TO_CHAR(T.ENDDATE,'YYYY-MM-DD') ENDDATE,ORDER_M,WORKER_M,PROGRESS,ROW_NUMBER() OVER(ORDER BY T_NUM DESC) AS rNUMFROM TODO ) TODO WHERE rNUM BETWEEN #{rowStart} AND #{rowEnd} ORDER BY T_NUM DESC </select> -->
+
+
+<select parameterType="com.spring.withwork.vo.Criteria" id="listPage" resultType="confirm">
+SELECT 
+   *
+FROM 
+   (SELECT
+      T.T_NUM,
+      TO_CHAR(T.ORDERDATE,'YYYY-MM-DD') ORDERDATE,
+      TO_CHAR(T.ENDDATE,'YYYY-MM-DD') ENDDATE,
+      TO_CHAR(V.CONFIRMDATE,'YYYY-MM-DD') CONFIRMDATE,
+      T.TITLE,
+      T.ORDER_M,
+      T.WORKER_M,
+      V.STATE,
+      V.V_NUM,
+      ROW_NUMBER() OVER(ORDER BY T.T_NUM DESC) rNUM 
+   FROM TODO T, VERIFICATION V
+      WHERE T.T_NUM = V.T_NUM 
+    AND T.ORDER_M = #{m_num}
+    AND V.STATE != '완료'
+
+) T, TODO_GUEST_INFO TGI
+WHERE 
+T.T_NUM = TGI.T_NUM
+AND T.rNUM BETWEEN #{rowStart} AND #{rowEnd}
+ORDER BY T.V_NUM DESC
+</select>
+
+ 
+ <select parameterType="com.spring.withwork.vo.Criteria" id="listPage2" resultType="confirm">
+SELECT 
+  *
+FROM 
+   (SELECT 
+   T.T_NUM,
+      TO_CHAR(T.ORDERDATE,'YYYY-MM-DD') ORDERDATE,
+      TO_CHAR(T.ENDDATE,'YYYY-MM-DD') ENDDATE,
+      TO_CHAR(V.CONFIRMDATE,'YYYY-MM-DD') CONFIRMDATE,
+      T.TITLE,
+      T.ORDER_M,
+      T.WORKER_M,
+      V.STATE,
+      V.V_NUM,
+      ROW_NUMBER() OVER(ORDER BY T.T_NUM DESC) rNUM 
+   FROM TODO T, VERIFICATION V
+      WHERE T.T_NUM = V.T_NUM 
+    AND T.WORKER_M =#{m_num}
+    AND V.STATE != '완료'
+) 
+T,TODO_GUEST_INFO TGI 
+WHERE T.T_NUM = TGI.T_NUM
+AND T.rNUM BETWEEN #{rowStart} AND #{rowEnd}
+ORDER BY T.V_NUM DESC
+</select> 
+
+
+<select parameterType="com.spring.withwork.vo.Criteria" id="listPage3" resultType="confirm">
+SELECT 
+ *
+FROM 
+   (SELECT 
+     T.T_NUM,
+      TO_CHAR(T.ORDERDATE,'YYYY-MM-DD') ORDERDATE,
+      TO_CHAR(T.ENDDATE,'YYYY-MM-DD') ENDDATE,
+      TO_CHAR(V.CONFIRMDATE,'YYYY-MM-DD') CONFIRMDATE,
+      T.TITLE,
+      T.ORDER_M,
+      T.WORKER_M,
+      V.STATE,
+      V.V_NUM,
+      ROW_NUMBER() OVER(ORDER BY T.T_NUM DESC) rNUM 
+   FROM TODO T, VERIFICATION V
+      WHERE T.T_NUM = V.T_NUM 
+    AND (T.WORKER_M = #{m_num} OR T.ORDER_M = #{m_num})
+    AND V.STATE = '완료'
+
+) T , TODO_GUEST_INFO TGI 
+WHERE T.T_NUM = TGI.T_NUM
+AND T.rNUM BETWEEN #{rowStart} AND #{rowEnd}
+ORDER BY T.V_NUM DESC
+</select>
+
+ 
+
+<select id="listCount" resultType="int">
+
+<![CDATA[
+	SELECT COUNT(T_NUM)
+	FROM TODO
+	WHERE T_NUM > 340
+]]>
+</select>
+
+<select id="selectConfirm" parameterType="confirm"  resultType="confirm">
+	SELECT
+		T.TITLE,
+		V.STATE,
+		V.FEEDBACK,
+		V.V_NUM
+	FROM 
+		TODO T,VERIFICATION V
+	WHERE T.T_NUM = V.T_NUM
+	AND V.T_NUM = #{t_num} 
+</select>
+
+
+
+</mapper>

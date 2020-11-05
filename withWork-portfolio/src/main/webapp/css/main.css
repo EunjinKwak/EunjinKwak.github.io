@@ -1,0 +1,715 @@
+
+/* 상단 메뉴 */
+
+.login {
+    cursor: pointer;
+}
+
+nav{
+	width: 100%; 
+	position: absolute; 
+	left: 0; 
+	top:0; 
+	padding: 0 50px; 
+	background: white; 
+	box-sizing: border-box; 
+	box-shadow: 1px 1px 3px #ddd;
+	z-index: 999;
+}
+
+nav.fix{
+	position: fixed; 
+}
+
+#header{
+
+}
+
+#header h1{
+	width: 60px; 
+	height: 60px; 
+	position: absolute;
+	left: 50px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#header h1 a{
+	display: block; 
+	width: 100%; 
+	height: 100%; 
+	background: url(../img/logo.png) no-repeat 50% 50%; 
+	background-size: contain; 
+	font-size: 0;
+}
+
+
+.leftNav{
+	float: right; 
+	line-height: 100px;
+	position: relative; 
+	z-index: 10;
+}
+
+.leftNav > li{
+    display: inline-block; 
+    height: 100px; 
+    padding: 0 20px; 
+    line-height: 100px; 
+    font-weight: 400; 
+    box-sizing: border-box;
+}
+
+.leftNav > li > * {
+	font-weight: 400;
+}
+
+.logout button{
+	background: none;
+	cursor: pointer;
+}
+
+/* main.jsp */
+.mainRolling{ width:100%; height:100%; overflow:hidden; text-align:center; display:block; position:relative; }
+.mainRolling .swiper-container { width: 100%; height: 100%; }
+.mainRolling .swiper-slide {width:100%; height: 100%; overflow:hidden;}
+.mainRolling .swiper-slide:nth-child(1){background: url(../img/swiperImg01.jpg) no-repeat top 100px center; background-size: cover;}
+.mainRolling .swiper-slide:nth-child(2){background: url(../img/swiperImg02.jpg) no-repeat top 100px center; background-size: cover;}
+
+.mainRolling .swiper-pagination_main { position:absolute; bottom:10%; left:50%; transform:translateX(-50%);  display:block; z-index:50}
+.mainRolling .swiper-pagination_main .swiper-pagination-bullet { border-radius:0; width:8px; height:8px; margin-right:20px; background-color: white; opacity:1; border-radius: 8px; }
+.mainRolling .swiper-pagination-bullet-active {width:70px !important; height:8px; background-color: #fd9f3b !important;}
+
+.mainRolling .swiperText{position: absolute; width: 40%; z-index: 20; left: 20%; top: -50%; text-align: left; transition: all .5s; }
+.mainRolling .swiper-slide.animate .swiperText{top: 30%; }
+.mainRolling .swiper-slide.animate .swiperText dd a{opacity: 1; transition-delay: .5s; transition-duration: .5s;}
+.swiperText dt{margin-bottom: 30px;}
+.swiperText * {color: #fff;}
+.swiperText .tit{font-size: 3rem; font-weight: 600; margin-bottom: 30px; line-height: 4rem;}
+.swiperText .txt{font-size: 1.5rem; font-weight: 400;}
+.swiperText dd a{display: inline-block; opacity: 0; background: #fd9f3b; color: white; font-size: 1rem; font-weight: 500; width: 180px; height: 48px; border-radius: 48px; text-align: center; line-height: 48px;}
+
+/* 그룹생성, 그룹검색 */
+#section1 ul{
+	height: 100%;
+	overflow: hidden;
+}
+
+#section1 ul li{
+	float: left;
+	width: 50%;
+	height: 100%;
+	position: relative;
+}
+
+#section1 ul li:first-of-type{
+	background: url("../img/mainGroupImg01.jpg") center center no-repeat;
+	background-size: cover;
+}
+
+#section1 ul li:nth-of-type(2){
+	background: url("../img/mainGroupImg02.jpg") center center no-repeat;
+	background-size: cover;
+}
+
+#section1 ul li .mainGroupWrap{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.6);
+	transition: all .3s;
+}
+
+#section1 ul li .mainGroupWrap .txt{
+	width: 100%;
+	position: absolute;
+	top: calc(50% + 50px);
+	left: 0;
+	transform: translateY(-50%);
+}
+
+#section1 ul li .mainGroupWrap img{
+	width: 80px;
+	margin-bottom: 30px;
+}
+
+#section1 ul li .mainGroupWrap p{
+	color: #fff;
+	margin-bottom: 25px;
+	font-size: 40px;
+	font-weight: 500;
+}
+
+#section1 ul li .mainGroupWrap span{
+	display: block;
+	font-size: 16px;
+	font-weight: 300;
+	color: rgba(255, 255, 255, 0.7);
+	line-height: 1.7;
+}
+
+#section1 ul li .mainGroupWrap a{
+	width: 180px;
+	height: 48px;
+	line-height: 48px;
+	font-size: 16px;
+	color: #ff8400;
+	font-weight: 600;
+	border-radius: 48px;
+	background: #fff;
+	text-align: center;
+	display: none;
+}
+
+#section1 ul li:hover .mainGroupWrap{
+	background:rgba(255, 114, 0, 0.65);
+}
+
+#section1 ul li:hover .mainGroupWrap span{
+	margin-bottom:55px;
+}
+
+#section1 ul li:hover .mainGroupWrap a{
+	display:inline-block;
+}
+
+/* 약관동의 화면(joinForm.jsp) */
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#joinFormHeader {
+    width: 460px;
+    margin: 0px auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+#joinFormHeader h1 a {
+    font-size: 44px;
+    text-align: center;
+    font-weight: bold;
+}
+
+ul.join_box {
+    background-color: white;
+}
+
+.checkBox{
+	margin: 50px 0;
+}
+
+.checkBox > ul{
+	margin-bottom: 10px;
+}
+
+.checkBox ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+#checkAllContent {
+    font-size: 1.15em;
+}
+
+.checkBox ul li:nth-child(2) {
+    font-weight: 400;
+}
+
+.checkBox .textarea {
+    width: 100%;
+    height: 90px; 
+    background-color: #f7f7f7;
+    color: #888;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.footBtwrap { 
+    margin-top: 15px;
+    font-size: 0;
+    text-align: right;
+}
+
+.footBtwrap li{
+	display: inline-block;
+}
+
+.footBtwrap li:first-child{
+	margin-right: 10px;
+}
+
+.footBtwrap li button{
+	background: none;
+}
+
+.footBtwrap li button a {
+    display: inline-block; 
+    width: 180px;
+    height: 48px; 
+    font-size: 16px;
+    text-align: center;
+    line-height: 48px;
+    border-radius: 24px;
+}
+
+.fpmgBt1 a {
+    background-color: #ff8400;
+    color:#fff;
+}
+
+.fpmgBt2 a {
+    background-color: #272a44;
+    color: #fff;
+}
+
+
+
+
+/* 회원가입 화면(signup.jsp) */
+
+
+
+
+#joinFormHeader {
+    width: 460px;
+    margin: 0px auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+#joinFormHeader h1 {
+    font-size: 44px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mainInner {
+    width: 1200px;
+    margin: 150px auto;
+}
+
+.mainInner .innerTit.groupImg{
+	width: 100%;
+	background: url(../img/groupTop.jpg) no-repeat center center;
+	background-size: cover;
+}
+
+.mainInner .innerTit.insertGroup{
+   width: 100%;
+   background: url(../img/insertGroupImg.jpg) no-repeat center center;
+   background-size: cover;
+}
+
+.mainInner .innerTit.myPage{
+	background-image: url(../img/myPageImg.jpg);
+}
+
+.mainInner .innerTit.join{
+	background-image: url(../img/joinImg.jpg);
+}
+
+.mainInner .innerTit dl{
+	padding: 50px;
+	box-sizing: border-box;
+	background: #00000050;
+}
+
+.mainInner .innerTit dt{
+	font-weight: 500;
+	font-size: 30px;
+	color: #fff;
+}
+
+.mainInner .innerTit dd{
+	font-weight: 200;
+	margin-top: 15px;
+	color: #fff;
+}
+
+.searchSelect{
+	text-align: right;
+	margin-top : 50px;
+}
+
+#searchForm > * {
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.groupTable{
+	width: 100%;
+	border-top: 2px solid #efefef;
+}
+
+.groupTable tr{
+	border-bottom: 1px solid #ddd;
+}
+
+.groupTable th{
+	font-weight: 400;
+	background: #efefef;
+}
+
+.groupTable th, .groupTable td{
+	font-size: 14px;
+	padding: 10px;
+}
+
+.groupTable td select, .groupTable td option{
+	font-size: 14px;
+	width: 100%;
+	margin-left: -3px;
+	outline: none;
+}
+
+.mainTableForm{
+	width: 100%;
+	margin-top: 20px;
+	border-top: 2px solid #efefef;
+}
+
+.mainTableForm tr{
+	border-bottom: 1px solid #ddd;
+	text-align: center;
+}
+
+.mainTableForm th, .mainTableForm td{
+	padding: 20px;
+	text-align: center;
+}
+
+.mainTableForm th{
+	background: #efefef;
+}
+
+.mainTableForm input {
+    outline: none;
+    /* width: 70%; */
+    font-size: 14px;
+}
+
+.mainTableForm caption{
+	text-align: left;
+	font-size: 20px;
+	font-weight: 400;
+	margin-bottom: 20px;
+}
+
+.mainTableForm caption span{
+	font-size: 14px;
+	font-wiehgt: 200;
+	line-height: 32px;
+	color: #ff8400;
+}
+
+.groupTableForm{
+	width: 100%;
+	margin-top: 50px;
+	border-top: 2px solid #efefef;
+}
+
+.groupTableForm tr{
+	border-bottom: 1px solid #ddd;
+}
+
+.groupTableForm th, .groupTableForm td{
+	padding: 20px;
+}
+
+.groupTableForm th{
+	background: #efefef;
+}
+
+.groupTableForm input {
+    outline: none;
+    /* width: 70%; */
+    font-size: 14px;
+}
+
+.groupTableForm.mypage input{
+	width: 70%;
+}
+
+.groupTableForm caption{
+	text-align: left;
+	font-size: 20px;
+	font-weight: 400;
+	margin-bottom: 20px;
+}
+
+.groupTableForm caption span{
+	font-size: 14px;
+	font-wiehgt: 200;
+	line-height: 32px;
+	color: #ff8400;
+}
+
+.checkId {
+	width: 30%;
+    height: 30px;
+    margin: 0 2%;
+    background-color: #272a44;
+    color: #fff;
+    font-size: 20px;		
+}
+
+.dateOfBirth label {
+    padding-left: 10px;
+}
+
+.dateOfBirth input {
+    border: 1px solid #ddd;
+    width: 26.1%;
+    height: 50px;
+    margin: 0 2%;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+.signupBtn{
+    background-color: #272a44;
+    color: #fff;
+}
+
+#signup .test{
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+.mainPopup {
+	width: 320px;
+}
+
+/* 메인메뉴 nav (nav.jsp) */
+
+#login {
+    width: 460px;
+    margin: 0px auto;
+}
+
+#login h1 {
+    font-size: 44px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 100px;
+    padding-bottom: 60px;
+}
+
+.navForm input {
+    position: relative;
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.navForm input#email, .navForm input#findEmail2, .navForm input#findEmail{
+	margin-bottom: 10px;
+}
+
+.navBtn button,  .navBtn input[type=button]{
+    width: 180px;
+    height: 55px;
+    font-size: 16px;
+    border-radius: 27.5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.navLoginBtn{
+	margin-top: 10px;
+}
+
+.navLoginBtn button{
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 500;	
+}
+
+.navShortBtn{
+	margin-top: 30px;
+	text-align: center;
+}
+
+.navShortBtn button{
+    width: 180px;
+    height: 48px;
+    font-size: 16px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 500;	
+}
+
+.addD, .addR{
+	background: none;
+	font-weight: 500;
+	color: #ff8400;
+	cursor: pointer;
+	padding: 0 10px;
+}
+
+.navBtn{
+	text-align: right;
+	margin-top: 30px;
+}
+
+
+.navBtn button.googleBtn{
+	margin-top: 10px;
+}
+
+#findIdPwd {   
+	float: right;
+    margin: 10px 0 30px 0;
+    cursor: pointer;
+}
+
+.otherLoginBtn{
+    margin-top: 30px;
+}
+
+.defaultBtn {
+	background-color: #272a44;
+    color: #fff;
+}
+.searchBtn {
+	height: 29px;
+	border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.googleBtn {
+    background-color: #EE4A4A;
+    color: white;
+}
+
+.kakaoBtn {
+    background-color: #FAFA39;
+    color: black;
+}
+
+
+
+
+/* 팝업 */
+
+/******************* 팝업 *******************/
+.popup {
+    display: none;
+    position: fixed;
+    width: 460px;
+    min-height: 300px;
+    max-height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.darkBack {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: .6;
+    z-index: 10;
+    top: 0px;
+}
+
+.popup dt {
+    padding: 20px 25px;
+    background: #272a44;
+    font-weight: 400;
+    color: white;
+    font-size: 18px;
+}
+
+.popup dt a {
+    color: white;
+    float: right;
+}
+
+.popup dd {
+    padding: 30px 25px;
+    background: white;
+}
+
+.popup .btnBox {
+    display: inline-block;
+    text-align: center;
+    font-size: 0;
+    margin-top: 20px;
+    width: 100%;
+    background-color: #ddd;
+}
+
+.popup .btnBox a {
+    display: inline-block;
+    width: 20%;
+    height: 44px;
+    line-height: 44px;
+    color: white;
+    background: #272a44;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 44px;
+}
+
+.popup .btnBox.set2 a{
+    width: 48%;
+}
+
+.popup .btnBox.set2 a:last-child(2) {
+    margin-left: 2%;
+    background: #ff8400;
+    font-weight: 500;
+}
+
+
+.listItem li::before {
+    content: "\2022";
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    display: inline-block; 
+    width: 16px;
+}
+
+.listItem li.import a, .listItem li.import a *{
+    font-weight: 500;
+}
+
+.listItem li.import::before {
+    content: "\2022";
+    font-size: 16px;
+    color: #ff8400;
+    font-weight: bold;
+    display: inline-block; 
+    width: 16px;
+}
+
+/*공통*/
+
+.displayNone {
+	display: none;
+}

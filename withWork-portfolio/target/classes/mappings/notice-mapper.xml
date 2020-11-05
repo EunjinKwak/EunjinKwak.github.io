@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NoticeDAO">
+
+	<!-- 메세지 입력 -->
+	<insert id="insertNotice" parameterType="notice">
+		INSERT INTO CHATMESSAGE (M_NUM, P_NUM, TIME, MESSAGE, ATTFILE, G_NUM, CM_NUM)
+		VALUES (#{m_num}, #{p_num}, SYSDATE, #{message}, '첨부파일', #{g_num}, CM_SEQ.NEXTVAL)
+	</insert>
+	
+	<insert id="insertMessenger" parameterType="notice">
+		INSERT INTO CHATMESSAGE2 (M_NUM, ROOM_ID, TIME, MESSAGE, ATTFILE, G_NUM, CM_NUM2)
+		VALUES (#{m_num}, #{room_id}, SYSDATE, #{message}, '첨부파일', #{g_num}, CM2_SEQ.NEXTVAL)
+	</insert>
+	
+	<!-- 대화명 수정 -->
+	<update id="updateNotice" parameterType="notice">
+		UPDATE MEMBER SET CONTENT = #{content} WHERE M_NUM = #{m_num}
+	</update>
+
+	<!-- 전체 조회 -->	
+	<select id="getNoticeList" parameterType="notice" resultType="notice">
+		SELECT C.M_NUM, C.P_NUM, TO_CHAR(C.TIME, 'AM HH12:MI') AS TIME, TO_CHAR(C.TIME, 'YYYY"년 "MM"월 "DD"일"') AS CHATDATE, C.MESSAGE, C.ATTFILE, C.G_NUM, C.CM_NUM,
+			   G.G_NUM, G.PASSWORD, G.G_NAME, G.EMAIL, G.REGDATE,
+			   M.M_NUM, M.C_NUM, M.G_NUM, M.AUTHORITY, M.D_NUM, M.CONTENT, R.ROLE
+		  FROM GUEST G, MEMBER M, CHATMESSAGE C, ROLES R
+		 WHERE G.G_NUM = M.G_NUM
+		   AND C.M_NUM = M.M_NUM
+		   AND M.R_NUM = R.R_NUM
+		   AND C.P_NUM = #{p_num}
+		 ORDER BY C.CM_NUM
+	</select>
+	
+	<select id="getMessengerList" parameterType="notice" resultType="notice">
+		SELECT C.M_NUM, C.ROOM_ID, TO_CHAR(C.TIME, 'AM HH12:MI') AS TIME, TO_CHAR(C.TIME, 'YYYY"년 "MM"월 "DD"일"') AS CHATDATE, C.MESSAGE, C.ATTFILE, C.G_NUM, C.CM_NUM2,
+			   G.G_NUM, G.PASSWORD, G.G_NAME, G.EMAIL, G.REGDATE,
+			   M.M_NUM, M.C_NUM, M.G_NUM, M.AUTHORITY, M.D_NUM, M.CONTENT, R.ROLE
+		  FROM GUEST G, MEMBER M, CHATMESSAGE2 C, ROLES R
+		 WHERE G.G_NUM = M.G_NUM
+		   AND C.M_NUM = M.M_NUM
+			AND M.R_NUM = R.R_NUM
+		   AND C.ROOM_ID = #{room_id}
+		 ORDER BY C.CM_NUM2
+	</select>
+	
+	<select id="getChatMember" parameterType="notice" resultType="notice">
+		SELECT G.G_NAME, R.ROLE, M.M_NUM, NVL(M.CONTENT, '상태메세지가 없습니다.') AS CONTENT
+		  FROM GUEST G, MEMBER M, ROLES R
+		 WHERE G.G_NUM = M.G_NUM
+            AND M.R_NUM = R.R_NUM
+            AND M.C_NUM = #{c_num}
+            AND M.M_NUM != #{m_num}
+		 ORDER BY R.ROLE, G.G_NAME
+	</select>
+	
+	<select id="getChatMember2" parameterType="notice" resultType="notice">
+		SELECT C1.ROOM_ID, C2.G_NAME, C2.ROLE, C2.CONTENT
+		  FROM (
+				SELECT *
+		          FROM CHATJOINER J, MEMBER M, GUEST G, ROLES R
+		         WHERE J.M_NUM = M.M_NUM
+		           AND G.G_NUM = M.G_NUM
+                   AND M.R_NUM = R.R_NUM
+		           AND M.M_NUM = #{m_num}) C1, 
+				(SELECT *
+		          FROM CHATJOINER J, MEMBER M, GUEST G, ROLES R
+		         WHERE J.M_NUM = M.M_NUM
+		           AND G.G_NUM = M.G_NUM 
+               	   AND M.R_NUM = R.R_NUM
+		           AND M.M_NUM != #{m_num}) C2
+		 WHERE C1.ROOM_ID = C2.ROOM_ID
+		 ORDER BY C2.ROLE, C2.G_NAME
+	</select>
+
+	<select id="setChatMember2" parameterType="notice" resultType="notice">
+		SELECT C1.ROOM_ID, C2.G_NAME, C2.ROLE, C2.CONTENT, C2.M_NUM
+		  FROM (
+				SELECT J.ROOM_ID
+		          FROM CHATJOINER J, MEMBER M, GUEST G, ROLES R
+		         WHERE J.M_NUM = M.M_NUM
+		           AND G.G_NUM = M.G_NUM
+	               AND M.R_NUM = R.R_NUM
+			       AND M.M_NUM = #{m_num}) C1, 
+				(SELECT G.G_NAME, R.ROLE, M.CONTENT, M.M_NUM, J.ROOM_ID
+		           FROM CHATJOINER J, MEMBER M, GUEST G, ROLES R
+		          WHERE J.M_NUM = M.M_NUM
+		            AND G.G_NUM = M.G_NUM
+                    AND M.R_NUM = R.R_NUM
+		            AND M.M_NUM != #{m_num}) C2
+		    WHERE C1.ROOM_ID = C2.ROOM_ID
+	</select>
+	
+	<select id="getChatMember2_In" parameterType="notice" resultType="notice">
+		SELECT C2.ROOM_ID, G.G_NAME, R.ROLE, M.CONTENT, C2.MESSAGE, TO_CHAR(C2.TIME, 'AM HH12:MI') AS TIME
+		  FROM CHATMESSAGE2 C2, MEMBER M, GUEST G, ROLES R
+		 WHERE C2.M_NUM = M.M_NUM
+		   AND M.G_NUM = G.G_NUM
+       	   AND G.G_NUM = R.G_NUM
+		   AND C2.ROOM_ID = #{room_id}
+	</select>
+	
+	<!-- 멤버 검색 -->
+	<select id="getNoticeList_Search" parameterType="notice" resultType="notice">
+		SELECT G.G_NAME, R.ROLE, M.M_NUM, NVL(M.CONTENT, '상태메세지가 없습니다.') AS CONTENT
+        FROM GUEST G, MEMBER M, ROLES R
+       WHERE G.G_NUM = M.G_NUM
+         AND R.R_NUM = M.R_NUM
+		 AND M.C_NUM = #{c_num}
+         AND M.M_NUM != #{m_num}
+           AND (G_NAME LIKE '%'|| #{searchMember} ||'%' 
+             OR R.ROLE LIKE '%'|| #{searchMember} ||'%')
+         ORDER BY R.ROLE, G.G_NAME
+	</select>
+	
+	<select id="getNoticeList_Search2" parameterType="notice" resultType="notice">
+		SELECT *
+		  FROM CHATJOINER J, GUEST G, MEMBER M, ROLES R
+		 WHERE J.M_NUM = M.M_NUM
+		   AND G.G_NUM = M.G_NUM
+		   AND M.R_NUM = R.R_NUM
+		   AND M.C_NUM = #{c_num}
+		   AND M.M_NUM != #{m_num}
+		   AND G_NAME LIKE '%'|| #{searchMember} ||'%' ORDER BY G_NAME
+		   ORDER BY R.ROLE, G.G_NAME
+	</select>
+	
+	<!-- 채팅방 생성 -->
+	<insert id="insertRoom" parameterType="notice">
+		INSERT INTO CHATROOM VALUES (ROOM_SEQ.NEXTVAL, SYSDATE)
+	</insert>
+	
+	<select id="getInsertRoom" parameterType="notice" resultType="notice">
+        SELECT C.M_NUM, C.ROOM_ID, 
+        G.G_NAME, R.ROLE, M.CONTENT
+		  FROM GUEST G, MEMBER M, CHATJOINER C, ROLES R
+		 WHERE G.G_NUM = M.G_NUM
+		   AND M.M_NUM = C.M_NUM
+       AND M.R_NUM = R.R_NUM
+		   AND M.M_NUM = #{m_num}
+	</select>
+	
+	<insert id="insertChatJoiner" parameterType="notice">
+		INSERT INTO CHATJOINER
+		VALUES (CJ_SEQ.NEXTVAL, (SELECT MAX(ROOM_ID) FROM CHATROOM), #{m_num})
+	</insert>
+	
+	<select id="projectNotice" parameterType="int" resultType="project">
+		SELECT P_NUM, C_NUM, M_NUM, NAME P_NAME, STARTDATE, ENDDATE, REGDATE, STATUS, SUBJECT, CONTENT FROM PROJECT WHERE P_NUM = #{p_num}
+	</select>
+	
+	<select id="getChatMember_Me" parameterType="notice" resultType="notice">
+      SELECT G.G_NAME, R.ROLE, M.M_NUM, NVL(M.CONTENT, '상태메세지가 없습니다.') AS CONTENT
+        FROM GUEST G, MEMBER M, ROLES R
+       WHERE G.G_NUM = M.G_NUM
+         AND R.R_NUM = M.R_NUM
+         AND M.M_NUM = #{m_num}
+   </select>
+</mapper>
+
+
+

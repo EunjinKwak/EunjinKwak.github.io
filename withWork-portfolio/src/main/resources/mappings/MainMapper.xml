@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MainMapper">
+
+	<!-- 1012수정 (박실) -->
+	<insert id="register" parameterType="com.spring.withwork.vo.GuestVO">
+		INSERT INTO GUEST(G_NUM, PASSWORD, G_NAME, EMAIL, REGDATE)
+		VALUES(GUEST_SEQ.NEXTVAL, #{password}, #{g_name}, #{email}, sysdate)
+	</insert>
+	
+	<!-- 1012수정 (박실) -->
+	<select id="checkId" parameterType="String" resultType="int">
+		select count(email) from guest where email = #{email}
+	</select>
+	
+	<select id="findId" parameterType="com.spring.withwork.vo.GuestVO" resultType="String">
+		select email from guest where email = #{email} and g_name = #{g_name}
+	</select>
+	
+	<!-- 1012수정 (박실) -->
+	<select id="chkId" parameterType="com.spring.withwork.vo.GuestVO" resultType="int">
+		select count(*) from guest where email = #{email} and g_name = #{g_name}
+	</select>
+	
+	<!-- 1012수정 (박실) -->
+	<update id="updatePwd" parameterType="com.spring.withwork.vo.GuestVO">
+		update guest set password = #{password} where email = #{email}
+	</update>
+	 
+	<!-- 1012수정 (박실) -->
+	<update id="updateAuthKey" parameterType="com.spring.withwork.vo.GuestVO">
+		update guest set authkey = #{authKey} where email = #{email}
+	</update>
+	
+	<!-- 1012수정 (박실) -->
+	<update id="updateAuthStatus" parameterType="com.spring.withwork.vo.GuestVO">
+		update guest set authstatus = #{authStatus} where email = #{email}
+	</update>
+	
+	<!-- 1012수정 (박실) -->
+	<select id="login" parameterType="com.spring.withwork.vo.GuestVO" resultType="int">
+		select count(authstatus) from guest where email = #{email} and password = #{password} and authstatus = 'withwork'
+	</select>
+	
+	<!-- 1012수정 (박실) -->
+	<select id="guestInfo"  parameterType="com.spring.withwork.vo.GuestVO" resultType="com.spring.withwork.vo.GuestVO">
+		select * from guest where email = #{email}
+	</select>
+	
+	<!-- 1012수정 (박실) -->
+	<insert id="insertGroup" parameterType="com.spring.withwork.vo.CompanyVO">
+		<selectKey keyProperty="c_num" order="BEFORE" resultType="int">
+			select company_seq.nextval from dual
+		</selectKey>
+	
+		insert into company(c_num, name, g_num, regdate, subject)
+		values(#{c_num}, #{name}, #{g_num}, sysdate, #{subject})
+	</insert>
+	
+	<!-- 1012수정 (박실) -->
+	<select id="otherLogin" parameterType="com.spring.withwork.vo.GuestVO" resultType="string">
+		select authstatus from guest where email = #{email}
+	</select>
+	
+	<!-- 1012수정 (박실) -->
+	<insert id="googleRegister" parameterType="com.spring.withwork.vo.GuestVO">
+		insert into guest(g_num, email, g_name, regdate, authstatus)
+		values(guest_seq.nextval, #{email}, #{g_name}, sysdate, #{authStatus} )
+	</insert>
+	
+	<insert id="kakaoRegister" parameterType="com.spring.withwork.vo.GuestVO">
+		insert into guest(g_num, id, g_name, regdate, authstatus)
+		values(guest_seq.nextval, #{id}, #{g_name}, sysdate, #{authStatus} )
+	</insert>
+	
+	<!-- 1012수정 (박실) -->
+	<update id="updateName" parameterType="com.spring.withwork.vo.GuestVO">
+		update guest set g_name = #{g_name} where email = #{email}
+	</update>
+	
+	<!-- 1012수정 (박실) -->
+	<select id="checkPwd" parameterType="com.spring.withwork.vo.GuestVO" resultType="int">
+		select count(email) from guest where email = #{email} and password = #{password} 
+	</select>
+	
+	<!-- 1012수정 (박실) -->
+	<delete id="withdrawal"  parameterType="com.spring.withwork.vo.GuestVO">
+		update guest set authstatus = 'withdrawal' where email = #{email}
+	</delete>
+	
+	<!-- 1009수정 (최은서) -->
+	<!-- 1013수정 (박실) -->
+	<select id="getProjectMe" parameterType="com.spring.withwork.vo.GuestVO" resultType="com.spring.withwork.vo.GuestVO">
+		SELECT G.*, M.M_NUM, C.C_NUM, C.NAME C_NAME 
+		FROM GUEST G, MEMBER M, COMPANY C
+		WHERE G.G_NUM = M.G_NUM AND M.C_NUM = C.C_NUM AND G.G_NUM = #{g_num}
+	</select>
+	
+	<!-- 1012추가 (박실) -->
+	<insert id="insertRoles" parameterType="java.util.List">
+		insert into roles(r_num, g_num, c_num, role)
+			select roles_seq.nextval, roles.* from(
+			
+			<foreach item="item" collection="list" separator="UNION ALL " >
+				select #{item.g_num}, #{item.c_num}, #{item.role}
+				from dual
+			</foreach>
+				
+			) roles
+			
+	</insert>
+	
+	<!-- 1012추가 (박실) -->
+	<insert id="insertDept" parameterType="java.util.List">
+		insert into department(d_num, c_num, depart)
+			select department_seq.nextval, dept.* from(
+			
+			<foreach item="item" collection="list" separator="UNION ALL " >
+				select #{item.c_num}, #{item.depart}
+				from dual
+			</foreach>
+			
+			) dept
+	</insert>
+	
+	<!-- 1012추가 (박실) -->
+	<insert id="insertMember" parameterType="com.spring.withwork.vo.MemberVO">
+		insert into member(m_num, c_num, g_num, authority)
+		values(member_seq.nextval, #{c_num}, #{g_num}, #{authority})
+	</insert>
+	
+	<!-- 1013추가 (박실) -->
+	<select id="getRoles" parameterType="string" resultType="com.spring.withwork.vo.RolesVO">
+		select * from roles where c_num = #{c_num}
+	</select>
+	
+	<!-- 1013추가 (박실) -->
+	<select id="getDept" parameterType="string" resultType="com.spring.withwork.vo.DepartmentVO">
+		select * from department where c_num = #{c_num}
+	</select>
+	
+	<!-- 1013추가 (박실) -->
+	<update id="updateMember" parameterType="com.spring.withwork.vo.DepartmentVO">
+		update member set d_num = #{d_num},
+		r_num = #{r_num}
+		where m_num = (select m.m_num
+						from member m, company c, roles r
+						where c.c_num = m.c_num and r.c_num = c.c_num and r.r_num = #{r_num})
+	</update>
+	
+	<select id="getGroupList" resultType="com.spring.withwork.vo.CompanyVO">
+	
+		<![CDATA[
+			select rn, c_num, name, subject, regdate , g_name
+			from
+			(
+			    select rownum rn, c.c_num c_num, c.name name, c.subject subject, c.regdate regdate, g.g_name g_name
+				from company c, guest g 
+			    where c.g_num = g.g_num 
+		]]>
+	
+		<choose>
+			<when test='type.equals("P")'>
+				and c.subject like '%' || '개인' || '%'
+			</when>
+			<when test='type.equals("C")'>
+				and c.subject like '%' || '회사' || '%'
+			</when>
+			<when test='type.equals("E")'>
+				and c.subject like '%' || '기타' || '%'
+			</when>
+		</choose>
+		   
+		<![CDATA[ 
+			    order by c.c_num desc
+			)
+				where rn > 0
+			    order by rn desc
+		]]>
+		
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) 
+		  from company
+		 where 
+		 
+		<choose>
+			<when test='type.equals("P")'>
+				subject like '%' || '개인' || '%' and
+			</when>
+			<when test='type.equals("C")'>
+				subject like '%' || '회사' || '%' and
+			</when>
+			<when test='type.equals("E")'>
+				subject like '%' || '기타' || '%' and
+			</when>
+		</choose>
+		
+	<![CDATA[  
+		 c_num > 0
+	]]>
+	</select>
+	
+	<select id="getGroup" parameterType="string" resultType="com.spring.withwork.vo.CompanyVO">
+		select c.c_num, c.name, c.subject, c.regdate , g.g_name
+		from company c, guest g 
+		where c.g_num = g.g_num and c.c_num = #{c_num}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

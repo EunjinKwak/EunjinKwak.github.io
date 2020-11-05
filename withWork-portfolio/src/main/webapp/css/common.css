@@ -1,0 +1,906 @@
+/******************* 왼쪽 nav *******************/
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 15%;
+    height: 100%;
+    background: #272a44;
+    padding: 50px 0;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+header * {
+    color: white;
+}
+
+.headerInner {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* 회사명, 로그인 정보 */
+.groupInfo dt {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.groupInfo dd img {
+    width: 20px;
+    vertical-align: sub;
+    margin-right: 5px;
+}
+
+.groupInfo span {
+    color: #ff8400;
+    font-weight: 400;
+}
+
+/* 전체 데이터 관리 영역 */
+.allInfo {
+    margin: 30px 0;
+}
+
+.allInfo li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 20px 10% 20px calc(10% + 30px);
+    background-repeat: no-repeat;
+    background-position: left 10% center;
+    background-size: 20px;
+    box-sizing: border-box;
+}
+
+.todoIcon {
+    background-image: url(../img/todo.png);
+}
+
+.roadMapIcon {
+    background-image: url(../img/roadmap.png);
+}
+
+.confirmIcon {
+    background-image: url(../img/confirmIcon.png);
+}
+
+.allInfo li.active a {
+    background-color: #1e2135;
+}
+
+/* 프로젝트 검색 */
+.projectSearch {
+    background: white;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 30px;
+    margin-top: 10px;
+    font-size: 0;
+}
+
+.projectSearch input[type="text"] {
+    width: 70%;
+    font-size: 12px;
+    background: transparent;
+    margin: 0 10px;
+    color: #333;
+    vertical-align: middle;
+}
+
+.projectSearch input[type="button"] {
+    width: calc(30% - 20px);
+    vertical-align: middle;
+    background: url(../img/search.png) no-repeat center right 10px;
+    background-size: 20px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* 프로젝트 list */
+.projectList {
+    margin-top: 30px;
+}
+
+.projectList > li > ul {
+    padding-bottom: 20px;
+}
+
+.projectList .projectTit {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-weight: 500;
+    padding: 20px 10%;
+}
+
+.projectList ul li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 10% 0 calc(12% + 20px);
+    background: url(../img/arrow.png) no-repeat left 12% center;
+    background-size: 10px;
+    line-height: 30px;
+}
+
+.projectList .active .projectTit {
+    background: #1e2135;
+}
+
+.projectList .active ul {
+    background: #1e2135
+}
+
+/******************* 중간 contents *******************/
+section {
+    position: fixed;
+    width: 80%;
+    height: 100%;
+    left: 15%;
+    top: 0;
+    padding: 50px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.smallMG {
+    margin-top: 30px;
+}
+
+.bigMG {
+    margin-top: 50px;
+}
+
+.conTit {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.conTit dt {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.department dt{
+    position: relative;
+}
+
+.department .dtImg{
+    background: url(../img/department.png) no-repeat left center;
+    background-size: auto 100%;
+    padding-left: 35px;
+}
+
+.department dt a{
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
+.conTit dd {
+    font-size: 14px;
+    color: #999;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.subTit {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.table table {
+    width: 100%;
+}
+
+.table caption {
+    text-align: left;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.table tr {
+    border-top: 1px solid #ddd;
+}
+
+.table tr:last-child {
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    font-weight: 400;
+    padding: 10px;
+    background: #efefef;
+    vertical-align: middle;
+}
+
+.table td {
+    font-size: 16px;
+    padding: 10px;
+    text-align: center;
+    line-height: 24px;
+}
+
+.tableInfo {
+    text-align: right;
+    font-size: 12px;
+    color: #999;
+    line-height: 24px;
+}
+
+.paging {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.paging li {
+    display: inline-block;
+}
+
+.paging .active a {
+    background: #ff8400;
+    color: white;
+}
+
+.paging a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/******************* 오른쪽 quickBar *******************/
+footer {
+    position: fixed;
+    width: 5%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background: #272a44;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.quickBar li{
+    margin-bottom: 30px;
+}
+
+.quickBar a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.quickBar a img {
+    width: 100%;
+}
+
+/******************* 팝업 *******************/
+.popup {
+    display: none;
+    position: fixed;
+    width: 40%;
+    max-height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background: white;
+}
+
+.darkBack {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: .6;
+    z-index: 10;
+}
+
+.popup > dl dt {
+    padding: 20px 25px;
+    background: #272a44;
+    font-weight: 400;
+    color: white;
+    font-size: 18px;
+}
+
+.popup > dl dt a {
+    color: white;
+    float: right;
+}
+
+.popup > dl dd {
+    padding: 20px 25px;
+    max-height: 360px;
+    overflow: auto;
+}
+
+.popup .btnBox {
+    display: inline-block;
+    text-align: center;
+    font-size: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.popup .btnBox a, .popup .btnBox input, .popupOK {
+    display: inline-block;
+    width: 20%;
+    height: 44px;
+    line-height: 44px;
+    color: white;
+    background: #272a44;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 44px;
+}
+
+.popup .btnBox.set2 a, .popup .btnBox.set2 input{
+    width: 48%;
+}
+
+.popup .btnBox.set2 a:last-child(2), .popup .btnBox.set2 input:last-child(2) {
+    margin-left: 2%;
+    background: #ff8400;
+    font-weight: 500;
+}
+
+
+.listItem li::before {
+    content: "\2022";
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    display: inline-block; 
+    width: 16px;
+}
+
+.listItem li.import a, .listItem li.import a *{
+    font-weight: 500;
+}
+
+.listItem li.import::before {
+    content: "\2022";
+    font-size: 16px;
+    color: #ff8400;
+    font-weight: bold;
+    display: inline-block; 
+    width: 16px;
+}
+
+/********** 팝업 - 멤버 리스트 (은진) **********/
+.memberTeam li a {
+    display: inline-block;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px 16px;
+    transition: 0.3s;
+}
+.memberTeam li a:hover {
+    color: #fd9f3b;
+}
+.memberTeam li.active a{
+    color: #fd9f3b;
+    font-weight: 500;  
+}
+.memberTeam {
+    margin-bottom: 10px;
+}
+.memberList {
+    display: none;
+}
+.memberList li{
+    margin: 10px 30px;
+    font-size: 14px;
+}
+.memberTeam img {
+    width: 14px;
+    margin-right: 10px;
+}
+
+/* 팝업검색바 */
+.search {
+    width: 99%;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+} 
+
+/* 멤버 추가, 수정, 삭제 영역 테이블 */
+.Tables th{
+    background-color: white;
+    vertical-align: middle;
+    width: 10% !important;
+}
+
+.Tables th img{
+    width: 15px;
+    vertical-align: middle;
+}
+.Tables td {
+    padding: 5px;
+    vertical-align: middle;
+    font-size: 12px;
+    text-align: center;
+}
+
+.Tables td:last-child{
+	text-align: center;
+}
+
+.Tables td p{
+	font-size: 14px;
+	line-height: normal;
+	text-align: left;
+}
+
+.Tables td input{
+	font-size: 12px;
+	font-weight: 400;
+	color: #ff8400;
+	background-color: white;
+	outline: none;
+}
+
+.Tables select{
+    -webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: url('../img/arrowDown.png') no-repeat 95% 50%;
+	width: 100%;
+}
+
+.Tables select::-ms-expand {
+    display: none;
+}
+
+.Tables select, .Tables select option {
+    font-size: 12px;
+    outline: none;
+}
+
+
+.Tables td .emailTxt {
+    font-size: 11px;
+}
+
+/* 멤버초대, 수정, 삭제 테이블 넓이 */
+
+.Tables .buttons {
+	width : 12%;
+}
+
+.upMember tr td:nth-child(3),
+.upMember tr td:nth-child(4),
+.upMember tr td:nth-child(5){
+	width: 60px;
+}
+
+.delMember tr td:nth-child(3),
+.delMember tr td:nth-child(4){
+	width: 15%;
+}
+
+
+/* 멤버초대, 수정, 삭제 탭메뉴 */
+.memberTab {
+    border-bottom: 1px solid #ddd;
+}
+.memberTab .tabs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.memberTab .tabs li {
+    float: left;
+}
+.memberTab .tabs li a {
+    display: inline-block;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    padding: 14.5px 16px;
+    transition: 0.3s;
+}
+.memberTab .tabs li.active a {
+    background-color: #fd9f3b;
+    font-weight: 500;
+    color: white;  
+}
+.memberCont .tab_content  {
+    overflow: auto;
+    overflow-x: hidden;
+    height: calc(100% - 100px);
+}
+.memberCont .tab_content > div {
+    display:none;
+}
+.memberCont .tab_content > div:first-child {
+    display:block;
+}
+
+/* 멤버팝업 */
+.pop {
+    position: fixed;
+    width: 30%;
+    height: 100%;
+    right: -100%;
+    z-index: 100;
+    background: white;
+    transition: right .5s;
+}
+
+.pop table{
+	table-layout: fixed;
+}
+
+.pop.show {
+    right: 5%;
+}
+
+.darkBack {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: .6;
+    z-index: 10;
+}
+
+.pop dt {
+    padding: 20px 25px;
+    background: #272a44;
+    font-weight: 400;
+    color: white;
+    font-size: 18px;
+}
+
+.pop dt a {
+    color: white;
+    float: right;
+}
+
+.pop dd {
+    padding: 20px 25px;
+    height: calc( 100% - 20px);
+    box-sizing: border-box;
+}
+
+.pop .btnBox {
+    display: inline-block;
+    text-align: center;
+    font-size: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.pop .btnBox a {
+    display: inline-block;
+    width: 20%;
+    height: 44px;
+    line-height: 44px;
+    color: white;
+    background: #272a44;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 44px;
+}
+
+.pop .btnBox.set2 a{
+    width: 48%;
+}
+
+.pop .btnBox.set2 a:last-child(2) {
+    margin-left: 2%;
+    background: #ff8400;
+    font-weight: 500;
+}
+
+/********************** 메신저 창 (팝업)-민형 *************************/
+
+.popupM {
+    position: fixed;
+    width: 30%;
+    height: 100%;
+    right: -100%;
+    z-index: 100;
+    background: white;
+    transition: right .5s;
+}
+
+.popupM.show{
+    right: 5%;
+}
+
+.popupM > dl dt {
+    padding: 20px 25px;
+    background: #272a44;
+    font-weight: 400;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.popupM > dl dt a {
+    color: white;
+    float: right;
+}
+
+.searchMemberChat {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+.msgPopupC {
+    font-size: 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.msgPopupC li {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.msgPopupC li:first-child{
+    border-right: 1px solid #ddd;
+}
+
+.msgPopupC a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.msgPopupC li.active a{
+    background: #fd9f3b;
+    color: white;
+    font-weight: 500;
+}
+
+.msgPopupAll {
+    margin: 0 20px;
+}
+
+.msgPopupAll dl {
+    background: url(../img/profile.png) no-repeat left center;
+    background-size: 40px;
+    padding-left: 55px;
+    padding-right: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.msgPopupAA {
+    height: 575px;
+    overflow: auto;
+}
+
+.msgPopupI {
+   border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+
+.msgPopupB {
+    display: none;
+    overflow: auto;
+    height: 542px;
+}
+
+.memPopup {
+    font-weight: 500;
+    padding-bottom: 7px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.memPopup2 {
+    font-weight: 500;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.onlineId {
+    font-size: 13px;
+    color: #999;
+    font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/********************** 프로필 창 (팝업)-민형 *************************/
+
+.popupP {
+    display: none;
+    position: fixed;
+    width: 25%;
+    min-height: 300px;
+    max-height: 700px;
+    height: 360px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background: white;
+}
+
+.popupP dt {
+    padding: 20px 25px;
+    background: #272a44;
+    font-weight: 400;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.popupP dt a {
+    color: white;
+    float: right;
+}
+
+.popupP dd {
+    padding: 20px 25px;
+}
+
+.popupP ul {
+    text-align: center;
+}
+
+.popupP li {
+    padding-bottom: 15px;
+}
+
+.popupP li:nth-child(1) {
+    padding-top: 10px;
+}
+
+.popupP li:nth-child(2) {
+    font-size: 18px;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.msgPopupD2 li {
+	margin-bottom: 10px;
+}
+ 
+.popupP li:nth-child(3) {
+    font-size: 14px;
+    color: #999;
+    font-weight: 400;
+}
+
+.popupP .btnBox {
+    display: inline-block;
+    text-align: center;
+    font-size: 0;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.popupP .btnBox input {
+    display: inline-block;
+    width: 20%;
+    height: 44px;
+    line-height: 44px;
+    color: white;
+    background: #272a44;
+    font-size: 17px;
+    text-align: center;
+    border-radius: 44px;
+}
+
+.popupP .btnBox.set2 input{
+    width: 33%;
+    margin: 4px;
+}
+
+.popupP .btnBox input:hover {
+    background: #ff8400;
+    color: white;
+}
+
+/********************** 상태메세지 창 (팝업)-민형 *************************/
+
+.popupP2 {
+	display: none;
+    position: fixed;
+    width: 25%;
+    min-height: 300px;
+    max-height: 700px;
+    height: 360px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background: white;
+}
+
+.popupP2 dt {
+    padding: 20px 25px;
+    background: #272a44;
+    font-weight: 400;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.popupP2 dd {
+    padding: 20px 25px;
+}
+
+.popupP2 ul {
+    text-align: center;
+}
+
+.searchMemberChat2 {
+    margin: 50px 0;
+    border: 1px solid #ddd;
+}
+
+.popupP2 .btnBox {
+    display: inline-block;
+    text-align: center;
+    font-size: 0;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.popupP2 .btnBox input {
+    display: inline-block;
+    width: 20%;
+    height: 44px;
+    line-height: 44px;
+    color: white;
+    background: #272a44;
+    font-size: 17px;
+    text-align: center;
+    border-radius: 44px;
+}
+
+.popupP2 .btnBox.set2 input{
+    width: 33%;
+    margin: 4px;
+}
+
+.popupP2 .btnBox input:hover {
+    background: #ff8400;
+    color: white;
+}
+
+.msgConPop {
+	font-size: 14px;
+    color: #999;
+    font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}

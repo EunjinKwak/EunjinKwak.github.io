@@ -1,0 +1,265 @@
+.todoTab {
+    overflow: hidden;
+}
+
+.todoNav {
+    float: left;
+    width: 20%;
+}
+
+.todoNav li:first-child{
+    border-top: 1px solid #ddd;
+}
+
+.todoNav li{
+    height: 50px;
+    background: #efefef;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.todoNav li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+    font-weight: 400;
+    padding: 0 45px 0 20px;
+    box-sizing: border-box;
+    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.todoNav .project a{
+    background: url(../img/project.png) no-repeat right 20px center;
+    background-size: 20px;
+}
+
+.todoNav .active a{
+    font-weight: 500;
+    color: white;
+    background-color: #fd9f3b;
+}
+
+.todoNav .project.active a{
+    background-image : url(../img/projectActive.png);
+}
+
+.todoCont {
+    float: left;
+    width: 80%;
+}
+
+.todoCont > li{
+    display: none;
+    width: 100%;
+    height: 250px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.todoCont > li.active{
+    display: block;
+}
+
+.todoCont li a{
+    display: inline-block;
+    width: calc(100% - 32px);
+    height: 100%;
+}
+
+
+.todoContList{
+	height: 100%;
+    overflow: hidden;
+}
+
+.todoContList li{
+    font-size: 0;
+    width: 48%;
+    float: left;
+    line-height: 32px;
+}
+
+.todoContList li:nth-child(2n){
+    margin-left: 2%;
+}
+
+.todoContList .todoContTit{
+    display: inline-block;
+    max-width: 60%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space:nowrap;
+    vertical-align: bottom;
+}
+
+
+.todoContList .deadLine{
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.departTodo dl{
+    width: 22%;
+    float: left;
+    margin-right: 4%;
+    margin-bottom: 30px;
+}
+
+.departTodo dl:nth-child(4n){
+    margin-right: 0;
+}
+
+.departTodo dt{
+    background: url(../img/employee.png) no-repeat left -2px;
+    background-size: 20px;
+    font-size: 0;
+    padding: 0 0 30px 30px;
+    position: relative;
+}
+
+.departTodo dt .memberName{
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.departTodo dt .todoType{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.departTodo dt .todoType .bullet{
+    font-weight: 900;
+    margin: 0 5px 0 10px;
+}
+
+.departTodo dt .todoType .bullet:first-child{
+    color: #ff8400;
+}
+
+.departTodo dd{
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: auto;
+}
+
+.departTodo dd ul{
+    height: 100%;
+}
+
+.departTodo dd li a{
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    width: calc(100% - 20px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 24px;
+}
+
+.departTodo dd li a span{
+	font-size: 14px;
+}
+
+.departTodo dd li a .deadLine, .departTodo dd li a .todoContTxt{
+	display: none;
+}
+
+.workDetail td{
+    text-align: left;
+}
+
+.workDetail td input[type="text"]{
+	width: 100%;
+	outline: none;
+}
+
+.workDetail td input[type="date"]{
+	font-size: 16px;
+}
+
+.workPopup label, .workAddPopup label{
+	margin-right: 20px;
+}
+
+.workDetail select{
+	outline: none;
+	width: 100%;
+	margin-left: -4px;
+}
+
+.projectTodo{
+    font-size: 0;
+    height: 200px;
+    overflow: auto;
+}
+
+.projectTodo li{
+    width: 23%;
+    display: block;
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #f3f3f3;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.projectTodo li.import{
+    background: #ffe5ca;
+}
+
+.projectTodo li:nth-child(4n){
+    margin-right: 0;
+}
+
+.projectTodo li .todoContTit{
+	display: block;
+    font-size: 16px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.projectTodo li .deadLine{
+	display: block;
+    font-size: 12px;
+    margin: 5px 0 15px 0;
+    color: #aaa;	
+}
+
+.projectTodo li .todoContTxt{
+	display: block;
+    font-size: 12px;
+    color: #888;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.teamAddPopup{
+	width: 500px;
+}
+
+.inviteBtn{
+	background: url(../img/inviteIcon.png) no-repeat center center;
+	background-size: 100%;
+	width: 16px;
+	height: 16px;
+	color: #ff8400;
+	cursor: pointer;
+	vertical-align: middle;
+}

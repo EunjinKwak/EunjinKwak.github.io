@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CalendarDAO">
+
+	<!-- 프로젝트 전체 불러오기 -->
+	<select id="getAllProject" parameterType="calendar"
+		resultType="calendar">
+		SELECT P.P_NUM, P.C_NUM, P.NAME, TO_CHAR(STARTDATE, 'YYYYMMDD') AS STARTDATE, TO_CHAR(ENDDATE, 'YYYYMMDD') AS ENDDATE, P.STATUS
+          FROM PROJECT P, COMPANY C
+         WHERE P.STATUS LIKE '%진행 중%'
+           AND P.C_NUM = C.C_NUM
+           AND P.C_NUM = #{c_num}
+	</select>
+</mapper>

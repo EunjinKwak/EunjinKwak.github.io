@@ -1,0 +1,457 @@
+/* --------------------roadmap/schedule header-------------------- */
+.roadMapNav{
+  font-size: 0;
+}
+
+.roadMapNav li{
+  display: inline-block;
+}
+
+.roadMapNav li a{
+  display: inline-block;
+  padding: 15px;
+}
+
+.roadMapNav li.active a{
+  font-weight: 500;
+  color: #fff;
+  background: #fd9f3b;
+}
+
+.roadMapCont > div{
+  display: none;
+}
+
+.progress .roadMapSearch{
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+}
+
+#searchForm > *{
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.roadMapState {
+  overflow: hidden;
+}
+
+.roadMapState .stateForm{
+  float: left;
+  width: 32%;
+  margin-right: 2%;
+}
+
+.roadMapState .stateForm:last-child{
+  margin-right: 0;
+}
+
+.stateForm > dt {
+  height: 30px;
+  padding-left: 25px;
+  background-repeat: no-repeat;
+  background-size: auto 16px;
+  background-position: left top;
+  font-weight: 400;
+}
+
+.stateForm > dd{
+	height: 325px;
+	overflow: auto;
+}
+
+.stateForm > dt.waiting{
+  background-image: url(../img/wait.png);
+}
+
+.stateForm > dt.starting{
+  background-image: url(../img/start.png);
+}
+
+.stateForm > dt.stopping{
+  background-image: url(../img/stop.png);
+}
+
+.stateForm > dd > a{
+	display: inline-block;
+	width: 100%;
+  	margin-bottom: 10px;
+}
+
+.stateForm > dd > a:last-child{
+	margin-bottom: 0;
+}
+
+.stateForm .projectThumb:hover{
+  background: url(../img/projectMore.png) no-repeat center center;
+  background-size: auto 60%;
+  background-color: #ddd;
+}
+
+.stateForm .projectThumb:before{
+  content: "";
+  
+}
+
+.stateForm .projectThumb{
+  border: 1px solid #ddd;
+  padding: 10px 10px;
+}
+
+.stateForm .projectThumb dt{
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 25px;
+  padding-left: 25px;
+  background: url(../img/projectThumb.png) no-repeat left center;
+  background-size: 20px;
+}
+
+.stateForm .projectThumb dd{
+  margin-bottom: 10px;
+  font-size: 14px;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #666;
+  font-weight: 400;
+}
+
+.stateForm .projectThumb dd:last-child{
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+.workDetail td{
+	text-align: left;
+}
+
+.workDetail textarea{
+	width: 100%;
+}
+
+
+/* ---------------------calendar  main----------------------*/
+
+.inner {
+	/* width: 1200px;
+	margin: 150px auto 100px; */
+}
+
+.backImg{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background-image:url(../img/background1.png), url(../img/background2.png);
+	background-position: right 50px bottom -5px, left bottom -10px;
+	background-repeat: no-repeat, no-repeat;
+	background-size: 20%;
+	bottom: 0;
+	opacity: .15;
+	z-index: -1;
+}
+
+ .todoBtnWrap {
+ 	display: inline-block;
+ 	cursor: pointer;
+ 	font-size : 10px;
+	/* display: inline-block;
+	cursor: pointer;
+	max-width: 80%;
+	color: white;
+	padding: .5rem;
+	border-radius: .5rem;
+	font-size: .8rem;
+	margin-bottom: .3rem; */
+}
+
+.todoBtnWrap .close {
+	color: white;	
+	float: right;
+	font-weight: 100;
+	margin-left: .5rem;
+}
+
+.todoBtnWrap .startBtn{
+	/* max-width: 80%; */
+    font-size: 12px;
+    /* vertical-align: middle; */
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #fd9f3b;
+    color: white;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 8px;
+    padding: 0 10px;
+    margin: 1.5px;
+    font-weight: 400;
+}
+.todoBtnWrap .endBtn{
+	
+    /* max-width: 80%; */
+    font-size: 12px;
+    /* vertical-align: middle; */
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #272a44;
+    color: white;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 8px;
+    padding: 0 10px;
+    margin: 1.5px;
+    font-weight: 400;
+	
+}
+
+.darkScreen {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: black;
+	opacity: .8;
+}
+
+#myCalendar {
+	width: 100%;
+	border: 1px solid #ddd;
+	table-layout: fixed;
+}
+
+#myCalendar caption {
+    margin: 1rem 2rem;
+    font-size: 30px;
+}
+
+#myCalendar th {
+	padding: 1rem;
+	font-weight: 400;
+}
+
+#myCalendar td {
+	vertical-align: top;
+	border: 1px solid #ddd;
+	padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+	height: 7rem;
+}
+
+#myCalendar td.null {
+	cursor: pointer;
+	background: url(../img/moreBtn.png) no-repeat center center;
+	background-color: #00000080;
+}
+
+#myCalendar td dl {
+	/* height: 8rem; */
+	overflow: auto;
+	padding-right: .5rem;
+}
+
+#myCalendar td dl::-webkit-scrollbar{ 
+	height:0.15rem; width:0.15rem; 
+}
+
+#myCalendar td dt {
+	margin-bottom: 5px;
+}
+
+#myCalendar td dt span{
+	vertical-align: middle;
+	font-weight: 400;
+}
+
+#myCalendar td dt .moreAddTodo{
+	display: none;
+	float: right;
+	font-weight: 600;
+	font-size: 1.2em;
+	color: orange;
+}
+
+
+#myCalendar caption .startWord span {
+	height: 10px;
+	width : 10px;
+	background-color : black;
+	display: inline-block;
+	background-color: #fd9f3b;
+	border-radius: 5px;
+	
+}
+#myCalendar caption .endWord span {
+	height: 10px;
+	width : 10px;
+	background-color : black;
+	display: inline-block;
+	background-color: #272a44;
+	border-radius: 5px;
+}
+#myCalendar caption .startWord {
+    text-align: right;
+    font-size : 13px;
+    font-weight: 400;
+}
+#myCalendar caption .endWord {
+    text-align: right;
+    margin-top: 10px;
+    font-size : 13px;
+    font-weight: 400;
+}
+#myCalendar .year, .month {
+	font-weight: 400;
+}
+
+#myCalendar th:first-child, #myCalendar td:first-child dt {
+	color: red;
+}
+
+#myCalendar th:last-child, #myCalendar td:nth-child(7) dt {
+	color: blue;
+}
+
+/* .detailPop {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 30rem;
+	background: white;
+	box-sizing: border-box;
+	z-index: 10;
+}
+
+.popHeader {
+	background: #ff8400;
+	color: #fff;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.popBody {
+	padding: 0 1rem;
+	margin-bottom: 1rem;
+}
+
+.popBody dt, .popBody dd {
+	font-size: 0;
+}
+
+.popBody label {
+	display: inline-block;
+	font-size: 1rem;
+	width: 10%;
+}
+
+.popBody .todoTitle {
+	margin: .8rem 0;
+}
+
+.popBody .todoText label {
+	vertical-align: top;
+	margin-top: .5rem;
+}
+
+.popBody input[type="text"], .detailPop textarea {
+	display: inline-block;
+	border: 1px solid #ddd;
+	font-size: 1rem;
+	padding: .5rem;
+	box-sizing: border-box;
+	width: 90%;
+}
+
+.btnWrap {
+	width: 70%;
+	margin: 0 auto;
+	margin-bottom: 1rem;
+	overflow: hidden;
+}
+
+.btnWrap input[type="button"] {
+	width: 48%;
+	float: left;
+	text-align: center;
+	background: #ff8400;
+	padding: .6rem;
+	border-radius: .5rem;
+	color: #fff;
+}
+
+.btnWrap input[type="button"].send{
+	display: none;
+}
+
+.btnWrap input[type="button"]:last-child {
+	margin-left: 4%;
+	background: #272a44;
+} */
+/* ---------------------------------------- modal ----------------------------------- */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+.dialog {
+  width: 50vw;
+  padding: 2em;
+  border-radius: 1em;
+  background: white;
+}
+
+/* -----------------------------------modal------------------------------------------- */
+.modal {
+  display: none;
+  top: px;
+}
+#modal-switch:checked ~ .modal {
+  display: flex;
+}
+label[for="modal-switch"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  /* top: 1.3rem; */
+  /* right: 1rem; */
+  /* z-index: 100; */
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  /* background: red; */
+}
+
+label[for="modal-switch"]:before {
+  font-size: 2rem;
+  cursor: pointer;
+}
+#modal-switch:checked ~ label[for="modal-switch"]:before {
+  color: dodgerblue;
+}
+#modal-switch,
+label[for="modal-switch"] span {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}

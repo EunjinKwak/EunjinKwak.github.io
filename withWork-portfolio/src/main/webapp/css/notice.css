@@ -1,0 +1,174 @@
+
+
+/********************** 공지사항 *************************/
+
+
+.conTitM .noticeImg1 {
+    margin-left: 75%;
+}
+
+.noticeImg1 {
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+.noticeImg2 {
+    vertical-align: middle;
+}
+
+.chatBox {
+    overflow: auto;
+    height: 490px;
+    margin: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.chatBox p {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    height: 50px;
+    background: url(../img/bar.png) repeat-x center;
+}
+
+.chatBox span {
+    font-size: 13px;
+    line-height: 50px;
+    font-weight: 400;
+    color: dimgray;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 10px;
+    background-color: white;
+}
+
+.chatBox dl {
+    background: url(../img/profile.png) no-repeat left 12px;
+    background-size: 40px;
+    padding-left: 55px;
+    font-size: 0px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.chatBox dt {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.chatBox dd {
+    display: inline-block;
+}
+
+.chatBoxCont1 {
+    background-color: #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 80%;
+    margin-top: 3px;
+}
+
+.chatBox ul {
+    padding-left: 65px;
+    font-size: 0;
+}
+
+.chatBoxCont2 {
+    display: inline-block;
+    background-color: #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 80%;
+    margin-bottom: 11px;
+}
+
+.chatTime2 {
+    display: inline-block;
+    font-size: 13px;
+    width: 16%;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+.chatTime {
+    font-size: 13px;
+    width: 16%;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+.chatFoot {
+    height: 70px;
+}
+
+.fileUpload {
+    overflow: hidden;
+}
+
+.fileUpload li {
+    float: left;
+}
+
+.fileUpload li:nth-child(1) {
+    width: 4%;
+}
+
+.fileUpload li:nth-child(2) {
+    width: 96%;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 0;
+}
+
+.chatSendBox textarea {
+    width: 90%;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: none;
+    outline: 0;
+}
+
+.chatSendBox input {
+    width: 10%;
+}
+
+.sendBtn {
+    display: inline-block;
+    width: 70px;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    background: #272a44;
+    font-size: 17px;
+    text-align: center;
+    border-radius: 10px;
+    vertical-align: bottom;
+}
+
+.sendBtn:hover {
+    background-color: #ff8400;
+    color: white;
+}
+
+.sendBtn2 {
+    display: inline-block;
+    width: 70px;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    background: #272a44;
+    font-size: 17px;
+    text-align: center;
+    border-radius: 10px;
+    vertical-align: bottom;
+}
+
+.sendBtn2:hover {
+    background-color: #ff8400;
+    color: white;
+}
+
+
+
+
