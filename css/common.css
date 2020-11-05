@@ -74,7 +74,7 @@
 .mainRolling .swiper-pagination_main { width: 200px; position:absolute; bottom:10%; left:50%; transform:translateX(-50%);  display:block; z-index:50}
 .mainRolling .swiper-pagination_main .swiper-pagination-bullet { border-radius:0; width:8px; height:8px; margin-right:20px; background-color: white; opacity:1; border-radius: 8px; }
 .mainRolling .swiper-pagination-bullet-active {width:70px !important; height:8px; background-color: black !important;}
-.mainRolling .swiperText{position: absolute; width: 40%; z-index: 20; left: 20%; top: -50%; text-align: left; transition: all /* .5s */; }
+.mainRolling .swiperText{position: absolute; width: 40%; z-index: 20; left: 20%; top: -50%; text-align: left; /* transition: all .5s; */ }
 .mainRolling .swiper-slide.animate .swiperText{top: 30%; }
 .swiperText dt{margin-bottom: 30px;}
 .swiperText * {color: #ddd;}
