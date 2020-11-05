@@ -1,0 +1,83 @@
+
+	#header {
+	     height : 70px;
+	}
+	.wrap {
+	   width: 24%; margin: 2% auto;
+	   /* display: block; */
+	   
+	}
+	.hakbun > input{
+	   width: 350px;
+	   height: 30px;
+	   border: black 1px solid;
+	   margin: 1% 0;
+	   padding-left :10px;
+	}
+	.name > input{
+	   width: 350px;
+	   height: 30px;
+	   border: black 1px solid;
+	   margin: 1% 0;
+	   padding-left :10px;
+	}
+	.password > input{
+	   width: 350px;
+	   height: 30px;
+	   border: black 1px solid;
+	   margin: 1% 0;
+	   padding-left :10px;
+	}
+	.select > select{
+	   width: 363px;
+	   height: 35px;
+	   font-size: 0.8rem;
+	   border: black 1px solid;
+	   margin: 1% 0;
+	   padding-left :10px;
+	}
+	.phone > input{
+	   width: 350px;
+	   height: 30px;
+	   border: black 1px solid;
+	   margin: 1% 0;
+	   padding-left :10px;
+	}
+	.email > input{
+	   width: 350px;
+	   height: 30px;
+	   border: black 1px solid;
+	   margin: 1% 0;
+	   padding-left :10px;
+	}
+	.bnt > input {
+	   width: 179px;
+	   height: 30px;
+	   background-color: #0B2161;
+	   color: white;
+	   border: #0B2161;
+	   font-size: 0.8rem;
+	   margin-top: 1%;
+	}
+	
+	.bnt1 > input {
+	   width: 363px;
+	   height: 30px;
+	   background-color: #0B2161;
+	   color: white;
+	   border: #0B2161;
+	   font-size: 0.8rem;
+	   margin: 1% auto;
+	}
+	/* 회원가입 */
+	.titles {
+		/* margin: 4% auto; */
+		font-size: 1.4rem;
+		/* width: 47%; */
+		text-align: center;
+		font-weight: 900;
+		/* margin-top: 4%; */
+	}
+	p {margin: auto;}
+	.wrap lable{font-weight: 900;}
+

@@ -1,0 +1,150 @@
+	#header {
+		height: 70px;
+		margin: 0 auto;
+	}
+	
+	.wrap{width: 70%; margin: 0 auto;}
+	.tables{
+		width: 100%;
+		table-layout: fixed;
+		border-collapse: collapse;
+		margin: 20px auto;
+	}
+	.tables th, .tables td{
+		padding: 10px;
+		text-align : center;
+		font-size : 0.8rem;
+	}
+	.tables td{
+		border: 1px solid #ddd;
+		padding: 10px;
+		text-align : center;
+		font-size : 0.8rem;
+	}
+	 .tables th{
+		text-align: center;
+		padding: 10px 10px;
+		width: 20%;
+		background-color: #0B2161;
+		color: white; 
+		border: 1px solid #ddd;
+		font-size : 0.9rem;
+	}
+	
+	.wrap p {
+		width: 70%;
+		margin: 0 auto;
+		text-align : center;
+		font-size: 1.3rem;
+	}
+	.nothing p {
+		text-align : center;
+		font-size: 1rem;
+	}
+	.wrap > .choose > select {
+		width:10%;
+		height: 50px;
+		font-size: 0.8rem;
+		border: black 1px solid;
+		margin: 3% 0;
+	}
+	/* 검색바 */
+	.choose {
+		margin : 2% 0;
+	}
+	.search {
+		border: black 1px solid;
+		width: 10%;
+		height: 20px;
+		font-size: 0.7rem;
+	}
+	.search_k {
+		border: black 1px solid;
+		width: 13%;
+		height: 18px;
+		font-size: 0.7rem;
+	}
+	.searchbnt {
+		border: 1px solid #0B2161;
+		width: 5%;
+		height: 20px;
+		background-color : #0B2161;
+		color: white;
+	}
+	.searchbnt:hover {
+		background-color : #00B3DC;
+		border: 1px solid #00B3DC;
+	}
+	 
+ 	input, button {
+		width:60px;
+		text-align : center;
+		font-size : 0.8rem;
+		
+	}
+	.subject {
+		width: 150px;
+	}
+	.classroom {
+		width : 100px;
+	}
+	.time, .name {
+		width: 80px;
+	}
+	/***** 페이지 표시 부분 스타일(시작) ****/
+	.page {
+		margin: 0 auto;
+	}
+	.paging { 
+		list-style: none;
+		display: inline-block;
+		
+	 }
+	.paging li {
+		float: left;
+		margin-right: 8px;
+		
+	}
+    .paging li a {
+		text-decoration: none;
+		display: block;
+		padding: 3px 7px;
+		border: 1px solid #00B3DC;
+		font-weight: bold;
+		color: black;
+	}
+	.paging .disable {
+		border: 1px solid silver;
+		padding: 3px 7px;
+		color: silver;
+	}
+	.paging .now {
+		border: 1px solid #0B2161;
+		padding: 3px 7px;
+		background-color: #0B2161;
+		color: white;
+	}
+	.paging li a:hover {
+		background-color: #00B3DC;
+		color: white;
+	} 
+	/***** 페이지 표시 부분 스타일(끝) ****/
+	.success {
+		float: center;
+		border: 1px solid #0B2161;
+		margin: auto;
+		background-color: #0B2161;
+		width : 60px;
+		padding: 3px 7px;
+		color: white;
+	}
+	.success input{
+		color: white;
+		width: 80px;
+	}
+	.success:hover {
+		background-color: #00B3DC;
+		border: 1px solid #00B3DC;
+		color: white;
+	}
+	

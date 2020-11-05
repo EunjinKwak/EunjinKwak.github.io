@@ -1,0 +1,54 @@
+
+	#header {
+        height: 70px;
+    }
+	
+    /* 공지사항 글쓰기 */
+    .wrap{width: 70%; margin: 50px auto;}
+	.wrap p {
+		width: 70%;
+		margin: 0 auto;
+		text-align : center;
+		font-size: 1.3rem;
+	}
+	.tables{
+		width: 100%;
+		table-layout: fixed;
+		border-collapse: collapse;
+		margin: 20px auto;
+	}
+	.tables th{
+		text-align: center;
+		padding: 10px 10px;
+		width: 20%;
+		background-color: #0B2161; 
+		color : white;
+		border: 1px solid #ddd;
+		font-size : 0.8rem;
+	}
+	.tables td{
+		text-align: left;
+		padding: 10px 20px;
+		border: 1px solid #ddd;
+		font-size : 0.8rem;
+	}
+	
+	/* 버튼들  */
+	.botton {
+		float: right;
+		border: 1px solid #0B2161;
+		margin: auto;
+		background-color: #0B2161;
+		width : 60px;
+		padding: 3px 7px;
+		color: white;
+	}
+	.botton input{
+		color: white;
+	}
+	.botton:hover {
+		background-color: #00B3DC;
+		border: 1px solid #00B3DC;
+		color: white;
+	}
+

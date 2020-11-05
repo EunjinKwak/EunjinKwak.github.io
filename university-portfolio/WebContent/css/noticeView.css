@@ -1,0 +1,103 @@
+
+	#header {
+        height: 70px;
+    }
+    /* 공지사항 글쓰기 */
+    .wrap{width: 70%; margin: 50px auto;}
+	.wrap p {
+		width: 70%;
+		margin: 20px auto;
+		text-align : center;
+		margin-bottom: 10px;
+		
+		/* font-size: 1.3rem; */
+	}
+	.tables{
+		width: 100%;
+		table-layout: fixed;
+		border-collapse: collapse;
+		margin: 20px auto;
+	}
+	.tables th{
+		text-align: center;
+		padding: 10px 10px;
+		width: 20%;
+		background-color: #0B2161; 
+		color : white;
+		border: 1px solid #ddd;
+		font-size : 0.8rem;
+	}
+	.tables td{
+		text-align: left;
+		padding: 10px 20px;
+		border: 1px solid #ddd;
+		font-size : 0.8rem;
+	}
+	
+	/* 버튼들  */
+	.botton {
+		float: right;
+		border: 1px solid #0B2161;
+		margin: auto;
+		background-color: #0B2161;
+		width : 60px;
+		padding: 3px 7px;
+		color: white;
+	}
+	.botton input{
+		color: white;
+	}
+	.botton:hover {
+		background-color: #00B3DC;
+		border: 1px solid #00B3DC;
+		color: white;
+	}
+	/* 닫기버튼 */
+   .close {
+		margin: 0 auto;
+		float: right;
+		width: 5%;
+	}
+	
+	/* 패스워드 확인 */
+	#pwdCheck{
+		display: none;
+	    position: fixed;
+	    background-color: white;
+	    border: 1px solid #ddd;
+	    width: 20%;
+	    height: 25%;
+	    /* margin: 10% auto; */
+	    text-align: center;
+	    left: 50%;
+	    top: 50%;
+	    transform: translate(-50%, -50%);
+	}
+	.pass {
+		margin-top: 12%;
+		font-size: 1.2rem;
+	}
+	.password {
+		margin : 7% auto;
+		border : 1px solid #ddd;
+		width : 70%;
+		height: 20%;
+		text-align: center;
+	}
+	.bnt {
+		border : 1px solid #0B2161;
+		width : 20%;
+		height: 15%;
+		color : white;
+		background-color:#0B2161;
+		margin-bottom : 10%;
+	}
+	.bnt:hover {
+	     background-color: #81DAF5;
+	     color: white;
+	}
+
+	/* 하단바 */
+	#footer {
+		margin-top: 300px;
+	}
