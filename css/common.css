@@ -74,7 +74,7 @@
 .mainRolling .swiper-pagination_main { width: 200px; position:absolute; bottom:10%; left:50%; transform:translateX(-50%);  display:block; z-index:50}
 .mainRolling .swiper-pagination_main .swiper-pagination-bullet { border-radius:0; width:8px; height:8px; margin-right:20px; background-color: white; opacity:1; border-radius: 8px; }
 .mainRolling .swiper-pagination-bullet-active {width:70px !important; height:8px; background-color: black !important;}
-.mainRolling .swiperText{position: absolute; width: 40%; z-index: 20; left: 20%; top: -50%; text-align: left; /* transition: all .5s; */ }
+.mainRolling .swiperText{position: absolute; width: 40%; z-index: 20; left: 20%; top: -50%; text-align: left; transition: all .0.0001s; }
 .mainRolling .swiper-slide.animate .swiperText{top: 30%; }
 .swiperText dt{margin-bottom: 30px;}
 .swiperText * {color: #ddd;}
@@ -287,7 +287,7 @@ margin-bottom: 50px;
 .mainRolling1 .swiper-slide:nth-child(2){/* width: 90%; */ background-color: white no-repeat top 0px center; background-size: cover; padding: 100px 10px 0px 70px;}
 .mainRolling1 .swiper-slide .swiper-slide-active animate {width: 90%;}
 
-.mainRolling1 .swiper-pagination_main { width: 200px; position:absolute; bottom:10%; left:50%; transform:translateX(-50%);  display:block; z-index:50}
+.mainRolling1 .swiper-pagination_main { width: 200px; position:absolute; bottom:7%; left:50%; transform:translateX(-50%);  display:block; z-index:50}
 .mainRolling1 .swiper-pagination_main .swiper-pagination-bullet { border-radius:0; width:8px; height:8px; margin-right:20px; background-color: #ddd; opacity:1; border-radius: 8px; }
 .mainRolling1 .swiper-pagination-bullet-active {width:70px !important; height:8px; background-color: black !important;}
 .swiperText1 a {width: 100px; height: 30px; color: #333; border: 1px solid #333; font-weight: 400; border-radius: 30px; text-align: center; line-height: 30px; float: right;}
